@@ -7,9 +7,8 @@ import { OrbitControls } from "@react-three/drei";
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 
-// --- Create a canvas texture with glowing text ---
 function TextureText(text: string, color = "#ff2a2a") {
-  const size = 1024; // larger for sharper text
+  const size = 1024; 
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
@@ -26,22 +25,20 @@ function TextureText(text: string, color = "#ff2a2a") {
   ctx.textBaseline = "middle";
   ctx.fillStyle = color;
 
-  // Glow effect
   ctx.shadowColor = color;
   ctx.shadowBlur = 0;
 
   ctx.fillText(text, size / 2, size / 2);
 
   const texture = new THREE.CanvasTexture(canvas);
-  texture.anisotropy = 16; // sharper texture
+  texture.anisotropy = 16; 
   texture.needsUpdate = true;
-  texture.minFilter = THREE.LinearMipMapLinearFilter; // better quality filtering
-  texture.wrapS = THREE.ClampToEdgeWrapping; // prevents horizontal repeating/bleeding
-  texture.wrapT = THREE.ClampToEdgeWrapping; // prevents vertical repeating/bleeding
+  texture.minFilter = THREE.LinearMipMapLinearFilter; 
+  texture.wrapS = THREE.ClampToEdgeWrapping; 
+  texture.wrapT = THREE.ClampToEdgeWrapping;
   return texture;
 }
 
-// --- Rotating cube component ---
 function RotateCube() {
   const [hovered, setHovered] = useState(false);
   const cubeRef = useRef<THREE.Mesh>(null);
@@ -75,14 +72,14 @@ function RotateCube() {
     return labels.map((text) => {
       const texture = TextureText(text);
       return new THREE.MeshStandardMaterial({
-        color: "#111",
+        color: "#ff2a2a",
         map: texture,
         emissive: "#ff2a2a",
         emissiveMap: texture,
         emissiveIntensity: 1.5,
         roughness: 0.2,
         metalness: 0.1,
-        opacity: 0.75,
+        opacity: 0.5,
         transparent: true,
         toneMapped: false, // keeps glow bright
       });
@@ -110,7 +107,7 @@ function RotateCube() {
 export default function Avatar() {
   return (
     <div style={{ width: "400px", height: "400px" }}>
-      <Canvas camera={{ position: [5, 5, 5], fov: 30 }}>
+      <Canvas camera={{ position: [9, 9, 9], fov: 20 }}>
         {/* Lights */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[-6, 3, -6]} intensity={0.3} color="#ff2a2a" />
