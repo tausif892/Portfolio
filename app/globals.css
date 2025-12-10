@@ -364,6 +364,10 @@ body::after {
   z-index: -1;
 }
 
+.about-text-actions {
+  pointer-events: auto;
+}
+
 .about-text-content {
   max-width: 600px;
 }
@@ -584,13 +588,22 @@ body::after {
   animation: fadeInUp 0.8s ease-out;
 }
 
+.timeline-main {
+    background: radial-gradient(
+    circle at top right,
+    rgba(239, 68, 68, 0.08),
+    transparent 60%
+  ),
+  #0a0a0a;
+}
 
 .timeline-title {
-  display: inline-block;
+  display: block;
   margin: 0 auto 80px auto;
   text-align: center;
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 700;
+  align-content: center;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 
@@ -827,6 +840,102 @@ body::after {
 /* ===============================
    PROJECTS GRID
 ================================ */
+
+/* ===============================
+   FULL-BLEED WRAPPER
+   (ensures the child can span full viewport)
+================================ */
+.full-bleed {
+  position: relative;     /* keep normal flow */
+  width: 100vw;           /* full viewport width */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  /* ensure it's above any container backgrounds */
+  z-index: 40;
+}
+
+/* If some ancestor has overflow hidden, try setting
+   overflow-visible here to allow visual breakout.
+   Remove if not needed. */
+.full-bleed { overflow: visible; }
+
+/* ===============================
+   PROJECTS FILTER (grid of buttons)
+================================ */
+.projects-filter {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0;                      /* separators handled by border */
+  align-items: stretch;
+  justify-items: stretch;
+
+  /* full-bleed background & borders */
+  background: auto;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+
+  /* spacing from nav and content */
+  margin-top: 24px;
+  margin-bottom: 40px;
+  padding: 0; /* buttons handle spacing */
+}
+
+/* ===============================
+   FILTER BUTTONS (rectangular bevel)
+================================ */
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  width: 100%;
+
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+
+  color: #bdbdbd;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* remove divider from last item */
+.projects-filter > .filter-btn:last-child {
+  border-right: none;
+}
+
+
+/* Hover & active states */
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e5e5e5;
+}
+
+.filter-btn.active {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Accessibility: focus outline */
+.filter-btn:focus {
+  outline: 3px solid rgba(241, 53, 53, 0.14);
+  outline-offset: 2px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 420px) {
+  .filter-btn { font-size: 12px; padding: 12px 8px; height: 48px; }
+  .projects-filter { gap: 0; }
+}
+
 
 .projects-section {
   padding: 5rem 6vw;

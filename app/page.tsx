@@ -29,8 +29,23 @@ export default function Home() {
           </p>
 
           <div className="hero-buttons">
-            <button className="btn-primary">Got a project?</button>
-            <button className="btn-outline">My Resume</button>
+            <div className="hero-buttons">
+            <a
+              href="mailto:tausifyourmail@gmail.com?subject=Project Collaboration"
+              className="btn-primary"
+            >
+              Got a project?
+            </a>
+
+            <a
+              href="/resume/resume_latest_after_intern.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
+            >
+              My Resume
+            </a>
+          </div>
           </div>
         </div>
 

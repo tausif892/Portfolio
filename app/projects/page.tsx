@@ -1,5 +1,6 @@
 "use client";
 
+import {useState} from "react";
 import NavBar from "../components/NavBar";
 import { ProjectCard } from "../components/ProjectCard";
 import { Project } from "../types/Project";
@@ -14,7 +15,7 @@ const projects: Project[] = [
       "/projects/attendance/3.png",
     ],
     github: "https://github.com/tausif892/NSS-Attendance-System",
-    category: "Mobile, Backend",
+    category: "Mobile, Backend, Cloud",
     techStack: ["Flutter", "Node.js", "MongoDB"],
     description:
       "A university club attendance management system with analytics and events.",
@@ -29,7 +30,7 @@ const projects: Project[] = [
       "/projects/recommendation-chatbot/3.png",
       "/projects/recommendation-chatbot/4.png"
     ],
-    category: 'Frontend, Backend, AI',
+    category: 'Frontend, Backend, AI, Cloud',
     github: "https://github.com/tausif892/Chatroom-Frontend , https://github.com/tausif892/Chatroom-Backend",
     techStack: ["React", "Node.js", "MongoDB", "FastAPI","Gemini","ChromaDB"],
     description:
@@ -73,7 +74,7 @@ const projects: Project[] = [
       "/projects/sce-chatbot/1.png",
       "/projects/sce-chatbot/2.png",
     ],
-    category: 'AI, Backend, Frontend',
+    category: 'AI, Backend, Frontend, Cloud',
     github: "https://github.com/username/project",
     techStack: ["Flutter", "Node.js", "MongoDB"],
     description:
@@ -94,13 +95,34 @@ const projects: Project[] = [
 ];
 
 export default function ProjectsSection() {
-  const categories = ["All", "Frontend", "Backend", "Mobile", "Data Science", "AI/ML", "Cloud"];
+  const[activeCategory, setActiveCategory] = useState("All");
+  const categories = ["All", "Frontend", "Backend", "Mobile","AI", "Cloud"];
+  const filteredProducts = activeCategory === "All" ? projects : projects.filter((project)=> project.category.toLowerCase().split(",").map((c)=>c.trim()).includes(activeCategory.toLowerCase()));
   return (
-    <section className="projects-section">
-        <NavBar />
-      {projects.map((project, i) => (
-        <ProjectCard key={i} project={project} />
+<>
+  <NavBar />
+  <div className="h-20" />
+
+  {/* FULL-BLEED FILTER BAR */}
+  <div className="full-bleed">
+    <div className="projects-filter">
+      {categories.map((cat) => (
+        <button
+          key={cat}
+          className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
+          onClick={() => setActiveCategory(cat)}
+        >
+          {cat}
+        </button>
       ))}
-    </section>
+    </div>
+  </div>
+
+  <section className="projects-section">
+    {filteredProducts.map((project, i) => (
+      <ProjectCard key={i} project={project} />
+    ))}
+  </section>
+</>
   );
 }
