@@ -726,6 +726,60 @@ body::after {
               0 0 30px var(--accent-glow);
 }
 
+/* Wrapper */
+/* Wrapper */
+.achievement-hover {
+  position: relative;
+}
+
+/* Base hidden state */
+.achievement-hover-info {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 340px;
+  padding: 18px 20px;
+
+  background: rgba(18, 18, 18, 0.96);
+  color: #eaeaea;
+
+  font-size: 0.95rem;
+  line-height: 1.65;
+
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* LEFT timeline → show message to the LEFT */
+.container.left .achievement-hover-info {
+  right: calc(100% + 24px);
+  transform: translateY(-50%) translateX(10px);
+}
+
+.container.left .achievement-hover:hover .achievement-hover-info {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* RIGHT timeline → show message to the RIGHT */
+.container.right .achievement-hover-info {
+  left: calc(100% + 24px);
+  transform: translateY(-50%) translateX(-10px);
+}
+
+.container.right .achievement-hover:hover .achievement-hover-info {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+
 /* Shimmer effect on hover */
 .content::before {
   content: "";

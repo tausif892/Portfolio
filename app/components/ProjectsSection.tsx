@@ -4,11 +4,9 @@ import Link from "next/link";
 
 export default function ProjectsSection() {
   const projects = [
-    { title: "AI Chatbot Assistant", tech: ["Next.js", "OpenAI"] },
-    { title: "E-Commerce Dashboard", tech: ["React", "Supabase"] },
-    { title: "3D Portfolio Demo", tech: ["Three.js"] },
-    { title: "Flutter Attendance App", tech: ["Flutter", "MongoDB"] },
-    { title: "Node API Service", tech: ["Node.js", "Express"] },
+    { title: "AI Information Assistant", tech: ["Flutter", "Gemini", "NodeJS"] },
+    { title: "AI-enabled recommendation chat system", tech: ["React", "Gemini", "NodeJS"] },
+    { title: "SEVA - Event Management App", tech: ["Flutter", "MongoDB"] },
   ];
 
   return (
