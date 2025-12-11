@@ -7,7 +7,7 @@ import AboutText from "./components/AboutText";
 
 export default function Home() {
   return (
-    <main className="px-20 py-50">
+    <main className="px-20 py-15">
       <Navbar />
       {/* HERO SECTION */}
       <section className="hero">

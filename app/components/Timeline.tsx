@@ -1,6 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { AchievementBox } from "./MileStone";
+
+function MobileItem({ children }: any) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="mobile-timeline-item">
+      <div className="mobile-title" onClick={() => setOpen(!open)}>
+        {children.titleComponent}
+      </div>
+
+      <div className={`mobile-details ${open ? "open" : ""}`}>
+        {children.detailsComponent}
+      </div>
+    </div>
+  );
+}
 
 export function TimeLine() {
   return (
@@ -9,97 +26,80 @@ export function TimeLine() {
 
       <div className="timeline">
 
-        <div className="container left">
-          <div className="content">
-            <div className="achievement-hover">
-              <AchievementBox
-                year="2021"
-                title="Passed Grade 10"
-                description="Scored a whopping 98.2% in ICSE"
-              />
-              <div className="achievement-hover-info">
-                This phase marked the foundation of my academic discipline and consistency.
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimelineItem
+          year="2021"
+          title="Passed Grade 10"
+          description="Scored a whopping 98.2% in ICSE"
+          details="This phase marked the foundation of my academic discipline and consistency."
+        />
 
-        <div className="container right">
-          <div className="content">
-            <div className="achievement-hover">
-              <AchievementBox
-                year="2023"
-                title="Completed Intermediate and joined MIT Manipal"
-                description="Scored 85% in one of the toughest high school boards of India, and became a CS fresher at MIT Manipal"
-              />
-              <div className="achievement-hover-info">
-                Transitioned from school life into rigorous computer science academics.
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimelineItem
+          year="2023"
+          title="Completed Intermediate and joined MIT Manipal"
+          description="Scored 85% in one of the toughest high school boards of India"
+          details="Transitioned from school life into rigorous computer science academics."
+        />
 
-        <div className="container left">
-          <div className="content">
-            <div className="achievement-hover">
-              <AchievementBox
-                year="October 2024"
-                title="The Beginning"
-                description="Built a patient tracking and assistant app for KMC Oncology department"
-              />
-              <div className="achievement-hover-info">
-                Competed in a 3-month long development cycle for the first time and came second in the contest.
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimelineItem
+          year="October 2024"
+          title="The Beginning"
+          description="Built a patient tracking and assistant app for KMC Oncology department"
+          details="Competed in a 3-month long development cycle and came second."
+        />
 
-        <div className="container right">
-          <div className="content">
-            <div className="achievement-hover">
-              <AchievementBox
-                year="July 2025"
-                title="The First Break"
-                description="Worked on AI-powered applications and advanced frontend systems"
-              />
-              <div className="achievement-hover-info">
-                Interned at I10AI solutions, exposing myself to countless new challenges in a fast-paced start-up environment. I migrated the databases and re-wrote entire backend codebases in 3 days and built Retrieval Augmented Generation (RAG) chatbots, integrating it with a real time multi-mapping chat system.
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimelineItem
+          year="July 2025"
+          title="The First Break"
+          description="Worked on AI-powered applications and advanced frontend systems"
+          details="Interned at I10AI solutions and migrated databases, rewrote backend in 3 days."
+        />
 
-        <div className="container left">
-          <div className="content">
-            <div className="achievement-hover">
-              <AchievementBox
-                year="October 2025"
-                title="The Alma Mater"
-                description="Built and deployed a chatbot on Microsoft Azure"
-              />
-              <div className="achievement-hover-info">
-                Built a RAG chatbot for my college and deployed it on Microsoft Azure. It gave me experience on how to build solutions to tackle problems faced by academia and their interaction with the students
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimelineItem
+          year="October 2025"
+          title="The Alma Mater"
+          description="Built and deployed a chatbot on Microsoft Azure"
+          details="Built a RAG chatbot for my college and deployed it on Microsoft Azure."
+        />
 
-        <div className="container right">
-          <div className="content">
-            <div className="achievement-hover">
-              <AchievementBox
-                year="December 2025"
-                title="The Fledgelings"
-                description="Started mentoring juniors in app, web, and AI development"
-              />
-              <div className="achievement-hover-info">
-                Took promising juniors under my wing to teach them software development through real projects with full ownership and accountability.
-              </div>
-            </div>
-          </div>
-        </div>
+        <TimelineItem
+          year="December 2025"
+          title="The Fledgelings"
+          description="Started mentoring juniors"
+          details="Guided juniors through industry-level development practices."
+        />
 
       </div>
     </section>
+  );
+}
+
+/* Shared component for desktop + mobile */
+function TimelineItem({ year, title, description, details }: any) {
+  return (
+    <>
+      {/* DESKTOP NORMAL VIEW */}
+      <div className="container content desktop-only">
+        <div className="achievement-hover">
+          <AchievementBox year={year} title={title} description={description} />
+          <div className="achievement-hover-info">{details}</div>
+        </div>
+      </div>
+
+      {/* MOBILE DRAWER VIEW */}
+      <div className="mobile-only">
+        <MobileItem
+          children={{
+            titleComponent: (
+              <AchievementBox
+                year={year}
+                title={title}
+                description={description}
+              />
+            ),
+            detailsComponent: <div className="mobile-details-inner">{details}</div>
+          }}
+        />
+      </div>
+    </>
   );
 }

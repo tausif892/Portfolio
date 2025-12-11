@@ -20,6 +20,133 @@
   box-sizing: border-box;
 }
 
+/* NAVBAR BASE */
+.navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background: var(--background);
+  color: var(--foreground);
+  backdrop-filter: blur(10px);
+}
+
+/* MAIN NAV BAR LAYOUT */
+.navbar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LOGO */
+.navbar-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* DESKTOP LINKS */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-btn {
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-btn:hover {
+  color: white;
+}
+
+.nav-underline {
+  position: relative;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 0;
+  background: #ef4444;
+  transition: 0.25s;
+}
+
+.nav-btn:hover .nav-underline::after {
+  width: 100%;
+}
+
+/* HAMBURGER MENU (MOBILE ONLY) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  background: white;
+  transition: 0.3s ease;
+}
+
+/* Animated hamburger transformation */
+.line1-open {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.line2-open {
+  opacity: 0;
+}
+
+.line3-open {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* MOBILE DROPDOWN MENU */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: var(--background);
+}
+
+.mobile-nav-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ======= MOBILE VIEW (max-width: 768px) ======= */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+}
+  
+
 body {
   background: var(--bg-main);
   color: var(--text-main);
@@ -417,6 +544,75 @@ body::after {
   box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 
+/* ============= MOBILE FIXES ============= */
+@media (max-width: 768px) {
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .hero-left {
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  .hero-greeting {
+    font-size: 2.8rem; /* Bigger greeting */
+    text-align: center;
+  }
+
+  .hero-name {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-role {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .hero-description {
+    max-width: 100%;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Buttons stack vertically */
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Right side canvas moves below */
+  .hero-right {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .hero-right::before {
+    inset: -20px; /* Slightly reduced glow */
+    padding-bottom: 120px;
+  }
+}
+
+
 /* ============================= */
 /* PROJECTS — HOME SECTION */
 /* ============================= */
@@ -589,6 +785,7 @@ body::after {
 }
 
 .timeline-main {
+  width: 100%;
     background: radial-gradient(
     circle at top right,
     rgba(239, 68, 68, 0.08),
@@ -641,7 +838,7 @@ body::after {
   bottom: -22px;
   transform: translateX(-50%);
 
-  width: 120px;
+  width: 100%;
   height: 10px;
 
   background: radial-gradient(
@@ -680,8 +877,8 @@ body::after {
 
 .container {
   position: relative;
-  width: 50%;
-  padding: 2rem;
+  width: 80%;
+  padding: 1rem;
   animation: fadeInUp 0.6s ease-out backwards;
 }
 
@@ -1831,7 +2028,7 @@ body::after {
   background: radial-gradient(
     circle at top right,
     rgba(239, 68, 68, 0.08),
-    transparent 60%
+    transparent 80%
   ),
   #0a0a0a;
 
@@ -1957,7 +2154,7 @@ body::after {
 }
 
 .about-text {
-  font-size: 0.92rem;
+  font-size: 0.50rem;
   line-height: 1.65;
   color: #b3b3b3;
   margin: 0;
@@ -2411,49 +2608,68 @@ html {
   }
 }
 
-/* TIMELINE MOBILE FIX */
+/* =============================== */
+/* CLEAN MOBILE TIMELINE (no line) */
+/* =============================== */
 @media (max-width: 768px) {
-  .timeline {
-    margin: 3rem auto;
-    padding: 0;
-  }
 
-  /* Hide center line on mobile */
+  /* Remove the center line entirely */
   .timeline::before {
-    left: 20px;
-    width: 2px;
+    display: none !important;
   }
 
+  /* Each timeline item becomes a clean block */
   .container {
-    width: 100%;
-    padding-left: 50px;
-    padding-right: 1rem;
-    padding-top: 2rem;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 1rem 0 !important;
+
+    position: static !important;
     text-align: left !important;
+
+    display: block !important;
+
+    /* Remove all fancy dot markers */
   }
 
-  /* Both left & right behave same on mobile */
+  /* Remove timeline dots */
+  .container::before {
+    display: none !important;
+  }
+
+  /* Clean content box */
+  .content {
+    width: 100% !important;
+    padding: 1rem 1.2rem !important;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+
+    box-sizing: border-box !important;
+    overflow-wrap: break-word !important;
+
+    /* No shadows, no arrows */
+  }
+
+  /* Left and right containers are the same */
   .container.left,
   .container.right {
-    left: 0;
-  }
-
-  /* Content box full width */
-  .content {
-    width: 100%;
-  }
-
-  /* Tooltip fixes */
-  .achievement-hover-info {
-    position: relative;
     left: 0 !important;
-    right: 0 !important;
-    transform: translateX(0) translateY(0) !important;
+  }
 
-    margin-top: 12px;
+  /* Tooltip also becomes block under the item */
+  .achievement-hover-info {
+    position: static !important;
+    margin-top: 0.75rem !important;
 
-    width: 100%;
-    max-width: none;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px !important;
+
+    overflow-wrap: break-word !important;
   }
 }
 
@@ -2466,83 +2682,211 @@ html {
 /* ========================================= */
 
 /* FINAL MOBILE FIX (max-width: 1024px) */
-@media (max-width: 1024px) {
 
-  /* FIX: Never allow horizontal scrolling on mobile */
+/* ============================================= */
+/* EXTREME SMALL SCREEN FIXES (max-width: 480px) */
+/* ============================================= */
+/* ===================================================== */
+/* MOBILE / COMPACT VIEW (Max-Width: 480px)              */
+/* Covers 370px, 414px, and other mobile sizes           */
+/* ===================================================== */
+@media (max-width: 480px) {
+
+  /* GLOBAL FIX: Never allow horizontal scroll */
   html, body {
-    overflow-x: auto !important;
+    overflow-x: hidden !important;
   }
 
-  /* ABOUT SECTION */
-  .about-section {
-    height: auto !important;
-    min-height: auto !important;
-    overflow: visible !important;
-    flex-direction: column !important;
-
-    padding: 2rem 1rem !important;
-    gap: 1.5rem !important;
-
-    /* 🔥 FIX: Prevent timeline overlap */
-    margin-bottom: 3rem !important;
+  /* Reduce global padding */
+  * {
+    box-sizing: border-box;
   }
 
-  /* HIDE LEFT COLUMN */
   .about-left {
-    display: none !important;
+    display: none;
   }
 
-  /* RIGHT COLUMN FIX */
+  .service-card h1, 
+  .service-card h2, 
+  .service-card h3, 
+  .service-card h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem !important; /* Tight spacing below title */
+    font-size: 1.2rem !important; /* Optional: Scale down headers slightly */
+  }
+
+  .service-card p, 
+  .service-card span, 
+  .service-card div {
+    margin-bottom: 0 !important; /* Remove excess bottom space */
+    line-height: 1.4 !important; /* Tighten line height */
+  }
+
+  /* 1. DISABLE STICKY & FORCE STACKING */
+  /* This ensures sidebars/sticky elements flow naturally in a list */
+  .about-section, 
+  .about-right, 
+  .services-list, 
+  .services-content,
+  .timeline {
+    position: static !important; /* Removes sticky behavior */
+    display: flex !important;
+    flex-direction: column !important; /* Forces vertical stack */
+    align-items: center !important; /* Centers items horizontally */
+    justify-content: center !important;
+    height: auto !important; /* Allow content to dictate height */
+  }
+
+  /* 2. CENTERING & LAYOUT FIXES */
+  .about-section {
+    padding: 0.2rem 1rem !important; /* More breathing room */
+    gap: 0.2rem !important; /* Space between stacked elements */
+    text-align: left !important;
+  }
+
   .about-right {
-    width: 80% !important;
-    margin: 0 !important;
-
-    /* 🔥 Prevent pushing downward */
-    padding: 0.5rem 0 !important;
-
-    height: auto !important;
-    overflow: visible !important;
-  }
-
-  /* SERVICES LIST */
-  .services-list {
-    width: 100% !important;
-    height: auto !important;
-    overflow: visible !important;
+    width: 50% !important;
     padding: 0 !important;
-
-    /* 🔥 ensures no gap collapse */
-    margin-bottom: 2rem !important;
+    margin: 0 auto !important;
   }
 
-  /* SERVICES CONTENT */
+  /* Text Alignment */
+  .about-text-title,
+  .section-title,
+  .timeline-title {
+    font-size: 1.7rem !important;
+    text-align: center !important;
+    width: 50% !important;
+  }
+
+  .about-text {
+    font-size: 1.1rem !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    width: 50% !important;
+  }
+
+  /* 3. CARD STACKING (SERVICES) */
+  /* Remove grid, force single column list */
+  .services-list,
   .services-content {
     display: flex !important;
     flex-direction: column !important;
-
-    gap: 1rem !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    gap: 0 !important; /* Let margins handle spacing for finer control */
+    width: 100% !important;  
   }
 
-  /* SERVICE CARDS */
   .service-card {
     width: 100% !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 1rem !important;
-    overflow: visible !important;
+    
+    /* Reduced margin between cards (was 1.5rem) */
+    margin: 0 auto 0.8rem auto !important; 
+    
+    /* Reduced internal padding (was 1.5rem) */
+    padding: 1rem !important; 
+    
+    /* Ensure height wraps content tightly */
+    height: auto !important; 
+    min-height: 0 !important; 
+    
+    border-radius: 12px !important;
+    position: relative !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;  }
+
+  /* Remove margin from last card */
+.service-card:last-child {
+    margin-bottom: 0 !important;
   }
 
-  /* Remove spacer */
-  .services-end-spacer {
+  /* TIMELINE CENTERING */
+  .timeline {
+    margin-top: 2rem !important;
+    padding: 0 0.5rem !important;
+    width: 100% !important;
+  }
+
+  /* BUTTONS & INTERACTIONS */
+  .about-text-button {
+    width: 100% !important;
+    max-width: 320px !important; /* Prevents button from being too wide on landscape */
+    margin: 1rem auto !important; /* Auto margins center the block */
+    padding: 0.8rem 1rem !important;
+    font-size: 1rem !important;
+    display: block !important; /* Necessary for margin: auto to work */
+  }
+
+  /* VISUAL TWEAKS */
+  .hero-glow,
+  .about-text-section::before {
+    filter: blur(50px) !important;
+    opacity: 0.4 !important; /* Slightly lower opacity for cleaner mobile look */
+  }
+}
+
+/* ===================================================== */
+/* ULTRA-NARROW DEVICES FIX (max-width: 360px)           */
+/* Refinements for small phones (Galaxy Fold, SE, etc)   */
+/* ===================================================== */
+@media (max-width: 360px) {
+  .about-text {
+    font-size: 1rem !important;
+  }
+
+  .about-text-title {
+    font-size: 1.4rem !important;
+  }
+
+  .service-card {
+    padding: 1rem !important;
+  }
+}
+
+/* Hide desktop version on mobile */
+@media (max-width: 768px) {
+  .desktop-only {
     display: none !important;
   }
 
-  /* 🔥 TIMELINE MUST START BELOW */
-  .timeline {
-    margin-top: 3rem !important;
-    position: relative;
-    z-index: 1;
+  .mobile-only {
+    display: block !important;
+  }
+
+  .mobile-timeline-item {
+    background: #111;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  .mobile-title {
+    cursor: pointer;
+  }
+
+  .mobile-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .mobile-details.open {
+    max-height: 500px;
+    margin-top: 0.75rem;
+  }
+
+  .mobile-details-inner {
+    color: #ccc;
+    padding-bottom: 0.5rem;
+  }
+
+  /* Remove hover tooltip spacing issues */
+  .achievement-hover-info {
+    display: none !important;
+  }
+}
+
+/* Desktop hides mobile version */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
   }
 }
