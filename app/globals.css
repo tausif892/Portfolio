@@ -1470,7 +1470,7 @@ body::after {
 
 .skills-grid {
   max-width: 80rem;
-  width: 100%;
+  width: 90%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
@@ -1802,6 +1802,21 @@ body::after {
   animation-play-state: paused;
 }
 
+@media (max-width: 768px) {
+  .skills-section {
+    grid-template-columns: 1fr; /* ONE IN A ROW */
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .skill-card {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
+
+
 /* =============================== */
 /* ABOUT ME SECTION                */
 /* =============================== */
@@ -1873,6 +1888,7 @@ body::after {
 
 
 .about-content-wrapper {
+  order: 0;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -2011,6 +2027,7 @@ body::after {
 /* ===================================================== */
 
 .services-list {
+  order: 0;
   width: 350px;
   height: 123vh;
   position: relative;
@@ -2222,4 +2239,310 @@ html {
     box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================= */
+/* MOBILE FIXES (max-width: 768px) */
+/* ============================= */
+@media (max-width: 768px) {
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .hero-left {
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  .hero-greeting {
+    font-size: 1.75rem;
+  }
+
+  .hero-name {
+    font-size: 2.5rem;
+  }
+
+  .hero-role {
+    font-size: 1.5rem;
+  }
+
+  .hero-description {
+    max-width: 100%;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .hero-right {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0;
+  }
+
+  .hero-right::before {
+    inset: -10px;
+    padding-bottom: 0;
+  }
+
+
+  /* ABOUT SECTION */
+  .about-text-section {
+    flex-direction: column;
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .about-text-title {
+    font-size: 1.75rem;
+  }
+
+  .about-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+
+
+  /* PROJECT CARDS */
+  .project-home-card {
+    width: 180px;
+    height: 180px;
+    padding: 1rem;
+  }
+
+  .projects-home-title {
+    font-size: 1.9rem;
+  }
+
+
+  /* TIMELINE */
+  .timeline::before {
+    left: 8px; /* Move vertical line to the left edge */
+  }
+
+  .container {
+    width: 100%;
+    padding-left: 2.2rem; /* spacing from line */
+    padding-right: 1rem;
+  }
+
+  .container.left,
+  .container.right {
+    left: 0 !important;
+    text-align: left !important;
+  }
+
+  /* Tooltip always appear below on mobile */
+  .achievement-hover-info {
+    width: 260px;
+    left: 0 !important;
+    right: auto !important;
+    top: calc(100% + 10px) !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* ===================== */
+/* RESPONSIVE FIXES      */
+/* ===================== */
+
+/* ABOUT SECTION MOBILE */
+@media (max-width: 1024px) {
+  .about-text-section {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1.2rem;
+  }
+
+  .about-text-content {
+    max-width: 100%;
+  }
+
+  .about-text-title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .about-text {
+    font-size: 1.1rem; /* was 3.5rem (way too big) */
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  .about-text-button {
+    display: block;
+    margin: 1.5rem auto 0 auto;
+  }
+}
+
+/* PROJECTS MOBILE FIX */
+@media (max-width: 768px) {
+  .projects-home {
+    padding: 3rem 1rem;
+  }
+
+  .projects-home-title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .projects-home-scroll {
+    gap: 1rem;
+    padding-left: 0.3rem;
+  }
+
+  .project-home-card {
+    width: 190px;
+    height: 190px;
+    padding: 1.2rem;
+  }
+
+  .project-home-title {
+    font-size: 0.9rem;
+  }
+
+  .project-home-tech {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* TIMELINE MOBILE FIX */
+@media (max-width: 768px) {
+  .timeline {
+    margin: 3rem auto;
+    padding: 0;
+  }
+
+  /* Hide center line on mobile */
+  .timeline::before {
+    left: 20px;
+    width: 2px;
+  }
+
+  .container {
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    text-align: left !important;
+  }
+
+  /* Both left & right behave same on mobile */
+  .container.left,
+  .container.right {
+    left: 0;
+  }
+
+  /* Content box full width */
+  .content {
+    width: 100%;
+  }
+
+  /* Tooltip fixes */
+  .achievement-hover-info {
+    position: relative;
+    left: 0 !important;
+    right: 0 !important;
+    transform: translateX(0) translateY(0) !important;
+
+    margin-top: 12px;
+
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* ============================= */
+/* MOBILE FIXES (max-width: 768px) */
+/* ============================= */
+
+/* ========================================= */
+/* FIX: PREVENT OVERFLOW ON MOBILE/TABLET    */
+/* ========================================= */
+
+/* FINAL MOBILE FIX (max-width: 1024px) */
+@media (max-width: 1024px) {
+
+  /* FIX: Never allow horizontal scrolling on mobile */
+  html, body {
+    overflow-x: auto !important;
+  }
+
+  /* ABOUT SECTION */
+  .about-section {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    flex-direction: column !important;
+
+    padding: 2rem 1rem !important;
+    gap: 1.5rem !important;
+
+    /* 🔥 FIX: Prevent timeline overlap */
+    margin-bottom: 3rem !important;
+  }
+
+  /* HIDE LEFT COLUMN */
+  .about-left {
+    display: none !important;
+  }
+
+  /* RIGHT COLUMN FIX */
+  .about-right {
+    width: 80% !important;
+    margin: 0 !important;
+
+    /* 🔥 Prevent pushing downward */
+    padding: 0.5rem 0 !important;
+
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* SERVICES LIST */
+  .services-list {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+
+    /* 🔥 ensures no gap collapse */
+    margin-bottom: 2rem !important;
+  }
+
+  /* SERVICES CONTENT */
+  .services-content {
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 1rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* SERVICE CARDS */
+  .service-card {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 1rem !important;
+    overflow: visible !important;
+  }
+
+  /* Remove spacer */
+  .services-end-spacer {
+    display: none !important;
+  }
+
+  /* 🔥 TIMELINE MUST START BELOW */
+  .timeline {
+    margin-top: 3rem !important;
+    position: relative;
+    z-index: 1;
+  }
 }
