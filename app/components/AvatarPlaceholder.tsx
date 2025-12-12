@@ -93,10 +93,10 @@ function RotateCube() {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      <boxGeometry args={[2.7, 2.7, 2.7]} />
+      <boxGeometry args={[5, 5, 5]} />
 
       <lineSegments>
-        <edgesGeometry args={[new THREE.BoxGeometry(2.7,2.7,2.7)]} />
+        <edgesGeometry args={[new THREE.BoxGeometry(5,5,5)]} />
         <lineBasicMaterial color="red" linewidth={3} toneMapped={false} />
       </lineSegments>
     </mesh>
@@ -106,8 +106,8 @@ function RotateCube() {
 // --- Main Avatar component ---
 export default function Avatar() {
   return (
-    <div style={{ width: "400px", height: "400px" }}>
-      <Canvas camera={{ position: [9, 9, 9], fov: 20 }}>
+    <div style={{ width: "450px", height: "450px" }}>
+      <Canvas camera={{ position: [14, 14, 14], fov: 20 }}>
         {/* Lights */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[-6, 3, -6]} intensity={0.3} color="#ff2a2a" />

@@ -14,15 +14,8 @@ const skills = [
   { name: "Vercel", category: "Cloud" },
 ];
 
-const categories = ["All", "Frontend", "Backend", "Mobile", "Data Science", "AI/ML", "Cloud"];
-
 export default function Skills() {
-  const [filter, setFilter] = useState("All");
   const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
-
-  const filteredSkills = filter === "All" 
-    ? skills 
-    : skills.filter(skill => skill.category === filter);
 
   return (
     <div className="skills-section">
@@ -37,22 +30,9 @@ export default function Skills() {
         </p>
       </div>
 
-      {/* Filter Pills */}
-      <div className="skills-filter-container">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setFilter(cat)}
-            className={`skills-filter-btn ${filter === cat ? 'active' : ''}`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
       {/* Skills Grid */}
       <div className="skills-grid">
-        {filteredSkills.map((skill, idx) => (
+        {skills.map((skill, idx) => (
           <div
             key={idx}
             onMouseEnter={() => setHoveredSkill(idx)}
