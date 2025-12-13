@@ -6,7 +6,11 @@ export default function ProjectsSection() {
   const projects = [
     { title: "AI Information Assistant", tech: ["Flutter", "Gemini", "NodeJS"] },
     { title: "AI-enabled recommendation chat system", tech: ["React", "Gemini", "NodeJS"] },
-    { title: "SEVA - Event Management App", tech: ["Flutter", "MongoDB"] },
+    { title: "SEVA - Event Management App", tech: ["Flutter", "MongoDB","NodeJS"] },
+    { title: "ReFL3KT - Time Tracking App", tech: ["Flutter", "MongoDB","NodeJS"] },
+    { title: "MomoPAy - Payment cum Budgeting App", tech: ["Flutter", "MongoDB", "NodeJS"] },
+    { title: "Save Earth Ride website", tech: ["React","NodeJS", "MongoDB"] },
+    { title: "Ind2b - B2B ECommerce platform", tech: ["React","NodeJS", "MongoDB"] }
   ];
 
   return (

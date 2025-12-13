@@ -65,6 +65,9 @@ export function TimeLine() {
 
   return (
     <section className="timeline-main">
+      {/* 👇 Added Heading Here */}
+      <h2 className="timeline-heading">My Journey</h2>
+
       <div className="timeline">
         {items.map((item, idx) => (
           <TimelineItem
@@ -82,7 +85,8 @@ function TimelineItem({ data, side }: any) {
   const { year, title, description, details } = data;
 
   return (
-    <>
+    /* 🔴 CHANGED: specific class instead of <main> */
+    <div className="timeline-item-wrapper"> 
       {/* DESKTOP */}
       <div className={`container ${side} desktop-only`}>
         <div className="achievement-hover">
@@ -102,6 +106,6 @@ function TimelineItem({ data, side }: any) {
           }}
         />
       </div>
-    </>
+    </div>
   );
 }

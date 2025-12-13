@@ -357,6 +357,11 @@ body::after {
   overflow: hidden; /* prevents weird jumps */
 }
 
+  .achievement-hover:hover {
+    z-index: 50;
+    position: relative; 
+  }
+
 
 .hero {
   width: 90%;
@@ -495,7 +500,6 @@ body::after {
   margin-top: 4rem;
   min-width: 60vh;
   display: flex;
-  justify-content: center;      /* center columns horizontally */
   align-items: center;          /* center columns vertically */
   gap: 3rem;
   padding: 0 0rem;
@@ -528,6 +532,18 @@ body::after {
   justify-content: center;      /* center vertically inside left column */
   height: 100%;                 /* take full height of parent */
 }
+
+.about-text-right {
+  width: 50%;
+  min-width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;      /* center vertically inside left column */
+  height: 100%;                 /* take full height of parent */
+}
+
 
 /* RIGHT COLUMN — Text + Button */
 .about-text-content {
@@ -2045,238 +2061,97 @@ body::after {
   }
 }
 
-/* =============================== */
-/* ABOUT ME SECTION                */
-/* =============================== */
+/* ===================================================== */
+/* NEW ABOUT SECTION — UNIFIED LAYOUT                    */
+/* ===================================================== */
+
+.sticky-section-about-page {
+  position: sticky;
+  top: 0;
+  height: auto;
+  width: auto;
+  background: var(--bg-main);
+  overflow: hidden; /* prevents weird jumps */
+  overflow-x: hidden
+}
 
 
 .about-section {
-  width: 100vw;
-  height: 120vh;
-  padding-bottom: 8rem; /* More space at bottom */
-  border-bottom: none; /* Remove any borders */
-  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 4rem;
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: 1fr 380px;
+  gap: 4rem;
   overflow: hidden;
   background: radial-gradient(
-    circle at top right,
-    rgba(239, 68, 68, 0.08),
-    transparent 80%
-  ),
-  #0a0a0a;
-
-  color: var(--foreground);
+      circle at top right,
+      rgba(239, 68, 68, 0.08),
+      transparent 80%
+    ),
+    #0a0a0a;
 }
 
-.about-section-block {
-  position: relative;
+/* REMOVE OLD SPLIT BEHAVIOR */
+.about-left,
+.about-right {
+  width: auto;
+  padding: 0;
+  height: auto;
 }
 
-/* LEFT */
-
+/* Disable old scroll areas */
 .about-left {
-  width: 50%;
-  padding: 0 6rem;
-  height: 100%;
-  max-height: 100%;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 0.5rem;
-  overflow-y: auto; /* Allow scrolling if content overflows */
+  overflow: visible;
 }
 
-.about-left-layout {
-  display: flex;
-  gap: 2.5rem;
-  align-items: flex-start;
-  width: 100%;
-}
+/* ===================================================== */
+/* DESCRIPTION PANEL (LEFT CONTENT)                      */
+/* ===================================================== */
 
-.about-social-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 0.5rem;
+.about-description {
   position: sticky;
-  top: 6rem;
+  top: 10%;
+  max-width: 560px;
 }
 
-.about-social-column::after {
-  content: "";
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(220, 38, 38, 0.4),
-    transparent
-  );
-  margin: 0 auto;
-}
-
-
-.about-content-wrapper {
-  order: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 600px;
-  width: 100%;
-}
-
-.about-section-block {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding: 1.5rem;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.6) 0%, rgba(15, 15, 15, 0.4) 100%);
-  border: 1px solid rgba(220, 38, 38, 0.12);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.about-section-block:hover {
-  background: linear-gradient(135deg, rgba(37, 37, 37, 0.7) 0%, rgba(26, 26, 26, 0.5) 100%);
-  border-color: rgba(220, 38, 38, 0.25);
-  box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(220, 38, 38, 0.1) inset;
-  transform: translateX(4px);
-}
-
-.about-section-block::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 20%;
-  width: 3px;
-  height: 60%;
-  border-radius: 2px;
-  background: linear-gradient(180deg, #dc2626 0%, #ef4444 50%, #dc2626 100%);
-  opacity: 0.7;
-  box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
-  transition: all 0.3s ease;
-}
-
-.about-section-block:hover::before {
-  opacity: 1;
-  box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
-}
-
-.about-subtitle {
-  font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.3;
-  margin: 0;
-  color: #f5f5f5;
-  letter-spacing: -0.02em;
-  transition: color 0.3s ease;
-}
-
-.about-section-block:hover .about-subtitle {
+.about-description h2 {
+  font-size: clamp(2.4rem, 3vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
   color: #ffffff;
 }
 
-.about-subtitle span {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.about-text {
-  font-size: 0.50rem;
-  line-height: 1.65;
-  color: #b3b3b3;
-  margin: 0;
-  transition: color 0.3s ease;
-}
-
-.about-section-block:hover .about-text {
-  color: #d4d4d4;
-}
-
-.about-text strong {
-  color: #ef4444;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-.about-social-links {
+.about-description p {
   display: flex;
-  gap: 1.25rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #cfcfcf;
 }
 
-.social-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border: 1px solid rgba(220, 38, 38, 0.15);
-  color: #e5e5e5;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  text-decoration: none;
-}
-
-.social-link:hover {
-  background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-  border-color: rgba(220, 38, 38, 0.5);
-  transform: translateY(-3px);
-  box-shadow: 
-    0 8px 24px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(220, 38, 38, 0.2);
-}
-
-.social-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.3s ease;
-}
-
-.social-link:hover .social-icon {
-  transform: scale(1.1);
-}
-/* RIGHT */
-
-.about-right {
-  width: 50%;
-  padding: 0 6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  scroll-margin: 1000px;
-}
 /* ===================================================== */
-/* SERVICES LIST CONTAINER                               */
+/* SERVICES — STICKY STACK                               */
 /* ===================================================== */
 
 .services-list {
-  order: 0;
-  width: 350px;
-  height: 123vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  align-items: flex-start;
+  justify-content: flex-start;
   position: relative;
   overflow: hidden;
 }
-
-/* ===================================================== */
-/* SERVICES CONTENT                                      */
-/* ===================================================== */
 
 .services-content {
   display: flex;
   flex-direction: column;
-  gap: 85vh;          /* KEY: controls reveal timing */
+  gap: 90vh;
   padding-bottom: 120px;
-}
-
-/* Spacer so last card exits cleanly */
-.services-end-spacer {
-  height: 100vh;
 }
 
 /* ===================================================== */
@@ -2284,610 +2159,165 @@ body::after {
 /* ===================================================== */
 
 .service-card {
-  height: 85vh;
-  padding: 3rem 2.5rem;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  height: 80vh;
+  padding: 2.8rem;
   position: sticky;
-  top: 80px;
+  top: 90px;
+
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
   border-radius: 22px;
-  border: 1px solid rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.18);
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  color: #e5e5e5;
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.5),
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
     0 0 0 1px rgba(220, 38, 38, 0.1) inset;
-  z-index: 1;
 
   transition:
-    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.4s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
-.service-card:nth-child(1) { 
-  z-index: 1; 
-  top: calc(80px + 0 * 100px);  /* First card at base position */
-}
-.service-card:nth-child(2) { 
-  z-index: 2; 
-  top: calc(80px + 1 * 100px);  /* Stops 100px below first card */
-}
-.service-card:nth-child(3) { 
-  z-index: 3; 
-  top: calc(80px + 2 * 100px);
-}
-.service-card:nth-child(4) { 
-  z-index: 4; 
-  top: calc(80px + 3 * 100px);
-}
-.service-card:nth-child(5) { 
-  z-index: 5; 
-  top: calc(80px + 4 * 100px);
-}
-.service-card:nth-child(6) { 
-  z-index: 6; 
-  top: calc(80px + 5 * 100px);
-}
+/* Layered stop effect */
+.service-card:nth-child(1) { z-index: 1; }
+.service-card:nth-child(2) { z-index: 2; top: 190px; }
+.service-card:nth-child(3) { z-index: 3; top: 290px; }
+.service-card:nth-child(4) { z-index: 4; top: 390px; }
+.service-card:nth-child(5) { z-index: 5; top: 490px; }
 
 /* Hover highlight */
 .service-card:hover {
-  background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
-  border-color: rgba(220, 38, 38, 0.5);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(220, 38, 38, 0.3) inset,
-    0 0 30px rgba(220, 38, 38, 0.15);
   transform: translateY(-6px);
-}
-
-.service-card:not(:hover) {
-  pointer-events: none;
-}
-
-/* Red accent strip with glow */
-.service-card::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 14%;
-  width: 4px;
-  height: 72%;
-  border-radius: 2px;
-  background: linear-gradient(180deg, #dc2626 0%, #ef4444 50%, #dc2626 100%);
-  opacity: 0.9;
-  box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.service-card:hover::before {
-  width: 5px;
-  opacity: 1;
-  box-shadow: 0 0 20px rgba(220, 38, 38, 0.8);
-}
-
-/* Subtle corner accent */
-.service-card::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle at top right, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
-  border-radius: 0 22px 0 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-
-.service-card:hover::after {
-  opacity: 1.5;
+  border-color: rgba(220, 38, 38, 0.5);
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.75),
+    0 0 30px rgba(220, 38, 38, 0.2);
 }
 
 /* ===================================================== */
-/* TEXT STYLES                                           */
+/* SERVICE TEXT                                          */
 /* ===================================================== */
 
 .services-title {
-  position: relative;
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #f5f5f5;
-
-  padding: 0.75rem 0 1rem;
+  padding-bottom: 0.8rem;
   margin-bottom: 1.2rem;
-  isolation: isolate;
-  background: inherit;
-  z-index: 5;
-
-  border-bottom: 1px solid rgba(220, 38, 38, 0.2);
-  transition: border-color 0.4s ease;
-}
-
-.service-card:hover .services-title {
-  border-bottom-color: rgba(220, 38, 38, 0.4);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.25);
 }
 
 .services-text {
-  position: relative;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.65;
-  color: #a3a3a3;
-  transition: color 0.4s ease;
-}
-
-.service-card:hover .services-text {
-  color: #d4d4d4;
+  color: #bdbdbd;
 }
 
 /* ===================================================== */
-/* OPTIONAL: SMOOTHER SCROLLING FEEL                     */
+/* MOBILE — LIST MODE (NO STICKY)                        */
 /* ===================================================== */
 
-html {
-  scroll-behavior: smooth;
-}
+@media (max-width: 365px) {
 
-.scroll-top-btn {
-  position: fixed;
-  bottom: 36px;
-  right: 36px;
-
-  width: 52px;
-  height: 52px;
-
-  border-radius: 14px;
-  border: 1px solid rgba(220, 38, 38, 0.25);
-
-  background: linear-gradient(
-    135deg,
-    #1a1a1a 0%,
-    #0f0f0f 100%
-  );
-
-  color: #f5f5f5;
-  font-size: 22px;
-  font-weight: 600;
-
-  cursor: pointer;
-  z-index: 9999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(220, 38, 38, 0.15) inset;
-
-  transition:
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ============================= */
-/* MOBILE FIXES (max-width: 768px) */
-/* ============================= */
-@media (max-width: 360px) {
-
-  /* HERO SECTION */
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem 1rem;
-  }
-
-  .hero-left {
-    max-width: 100%;
-    padding-bottom: 0;
-  }
-
-  .hero-greeting {
-    font-size: 1.75rem;
-  }
-
-  .hero-name {
-    font-size: 2.5rem;
-  }
-
-  .hero-role {
-    font-size: 1.5rem;
-  }
-
-  .hero-description {
-    max-width: 100%;
-  }
-
-  .hero-buttons {
-    justify-content: center;
-  }
-
-  .hero-right {
-    width: 100%;
-    height: auto;
-    padding-bottom: 0;
-  }
-
-  .hero-right::before {
-    inset: -10px;
-    padding-bottom: 0;
-    }
-
-/* Fullscreen About Section */
-  section.about-section {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 2rem 1.5rem;
-    text-align: center;
-
-    background: #0a0a0a !important;  /* Forces visibility */
-    z-index: 2;
-  }
-
-  /* Content */
-  .about-section .about-container {
-    max-width: 600px;
-    width: 100%;
-  }
-
-  /* Title */
-  .about-section .about-title {
-    font-size: clamp(2rem, 4vw, 3rem) !important;  /* Scales beautifully */
-    font-weight: 700;
-    margin-bottom: 1.2rem;
-    color: #ffffff !important;
-  }
-
-  /* Paragraphs */
-  .about-section .about-text {
-    font-size: clamp(1.1rem, 2.6vw, 1.25rem) !important; /* Bigger text */
-    line-height: 1.7;
-    color: #dcdcdc !important;
-    margin-bottom: 1.2rem;
-    font-weight: 300;
-  }
-
-  /* Button */
-  .about-section .about-button {
-    margin-top: 1.8rem;
-    display: inline-block;
-    padding: 0.85rem 2rem;
-
-    background: #ef4444 !important;
-    color: white !important;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: 0.2s ease;
-  }
-
-  .about-section .about-button:hover {
-    background: #dc2626 !important;
-  }
-
-
-  /* PROJECT CARDS */
-  .project-home-card {
-    width: 180px;
-    height: 180px;
-    padding: 1rem;
-  }
-
-  .projects-home-title {
-    font-size: 1.9rem;
-  }
-
-
-  /* TIMELINE */
-  .timeline::before {
-    left: 8px; /* Move vertical line to the left edge */
-  }
-
-  .container {
-    width: 100%;
-    padding-left: 2.2rem; /* spacing from line */
-    padding-right: 1rem;
-  }
-
-  .container.left,
-  .container.right {
-    left: 0 !important;
-    text-align: left !important;
-  }
-
-  /* Tooltip always appear below on mobile */
-  .achievement-hover-info {
-    width: 260px;
-    left: 0 !important;
-    right: auto !important;
-    top: calc(100% + 10px) !important;
-    transform: translateY(0) !important;
-  }
-}
-
-/* ===================== */
-/* RESPONSIVE FIXES      */
-/* ===================== */
-
-/* ABOUT SECTION MOBILE */
-@media (max-width: 1024px) {
-  .about-text-section {
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 0 1.2rem;
-  }
-
-  .about-text-content {
-    max-width: 100%;
-  }
-
-  .about-text-title {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  .about-text {
-    font-size: 1.1rem; /* was 3.5rem (way too big) */
-    line-height: 1.7;
-    text-align: center;
-  }
-
-  .about-text-button {
-    display: block;
-    margin: 1.5rem auto 0 auto;
-  }
-}
-
-/* PROJECTS MOBILE FIX */
-@media (max-width: 768px) {
-  .projects-home {
-    padding: 3rem 1rem;
-  }
-
-  .projects-home-title {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-
-  .projects-home-scroll {
-    gap: 1rem;
-    padding-left: 0.3rem;
-  }
-
-  .project-home-card {
-    width: 190px;
-    height: 190px;
-    padding: 1.2rem;
-  }
-
-  .project-home-title {
-    font-size: 0.9rem;
-  }
-
-  .project-home-tech {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.6rem;
-  }
-}
-
-/* =============================== */
-/* CLEAN MOBILE TIMELINE (no line) */
-/* =============================== */
-@media (max-width: 768px) {
-
-  /* Remove the center line entirely */
-  .timeline::before {
-    display: none !important;
-  }
-
-  /* Each timeline item becomes a clean block */
-  .container {
-    width: 100% !important;
-    padding: 0 !important;
-    margin: 1rem 0 !important;
-
-    position: static !important;
-    text-align: left !important;
-
-    display: block !important;
-
-    /* Remove all fancy dot markers */
-  }
-
-  /* Remove timeline dots */
-  .container::before {
-    display: none !important;
-  }
-
-  /* Clean content box */
-  .content {
-    width: 100% !important;
-    padding: 1rem 1.2rem !important;
-
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-
-    box-sizing: border-box !important;
-    overflow-wrap: break-word !important;
-
-    /* No shadows, no arrows */
-  }
-
-  /* Left and right containers are the same */
-  .container.left,
-  .container.right {
-    left: 0 !important;
-  }
-
-  /* Tooltip also becomes block under the item */
-  .achievement-hover-info {
-    position: static !important;
-    margin-top: 0.75rem !important;
-
-    width: 100% !important;
-    padding: 0.75rem 1rem !important;
-
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px !important;
-
-    overflow-wrap: break-word !important;
-  }
-}
-
-/* ============================= */
-/* MOBILE FIXES (max-width: 768px) */
-/* ============================= */
-
-/* ========================================= */
-/* FIX: PREVENT OVERFLOW ON MOBILE/TABLET    */
-/* ========================================= */
-
-/* FINAL MOBILE FIX (max-width: 1024px) */
-
-/* ============================================= */
-/* EXTREME SMALL SCREEN FIXES (max-width: 480px) */
-/* ============================================= */
-/* ===================================================== */
-/* MOBILE / COMPACT VIEW (Max-Width: 480px)              */
-/* Covers 370px, 414px, and other mobile sizes           */
-/* ===================================================== */
-@media (max-width: 360px) {
-
-  /* GLOBAL FIX: Never allow horizontal scroll */
-  html, body {
-    overflow-x: hidden !important;
-  }
-
-  /* Reduce global padding */
-  * {
-    box-sizing: border-box;
-  }
-
-  .about-left {
-    display: none;
-  }
-
-  .service-card h1, 
-  .service-card h2, 
-  .service-card h3, 
-  .service-card h4 {
-    margin-top: 0 !important;
-    margin-bottom: 0.5rem !important; /* Tight spacing below title */
-    font-size: 1.2rem !important; /* Optional: Scale down headers slightly */
-  }
-
-  .service-card p, 
-  .service-card span, 
-  .service-card div {
-    margin-bottom: 0 !important; /* Remove excess bottom space */
-    line-height: 1.4 !important; /* Tighten line height */
-  }
-
-  /* 1. DISABLE STICKY & FORCE STACKING */
-  /* This ensures sidebars/sticky elements flow naturally in a list */
-  .about-section, 
-  .about-right, 
-  .services-list, 
-  .services-content,
-  .timeline {
-    position: static !important; /* Removes sticky behavior */
-    display: flex !important;
-    flex-direction: column !important; /* Forces vertical stack */
-    align-items: center !important; /* Centers items horizontally */
-    justify-content: center !important;
-    height: auto !important; /* Allow content to dictate height */
-  }
-
-  /* 2. CENTERING & LAYOUT FIXES */
+  /* Flatten layout */
   .about-section {
-    padding: 0.2rem 1rem !important; /* More breathing room */
-    gap: 0.2rem !important; /* Space between stacked elements */
-    text-align: left !important;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem ;
+    gap: 2rem;
   }
 
-  .about-right {
-    width: 50% !important;
-    padding: 0 !important;
-    margin: 0 auto !important;
-  }
-
-  /* Parent container */
-.timeline-main {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important; /* center horizontally */
-  justify-content: center !important; /* center vertically */
-  width: 100% !important;
-  }
-
-/* Timeline title */
-.timeline-title {
-  display: block !important;      /* force block to take width */
-  width: 100% !important;         /* take full width of parent */
-  font-size: clamp(5rem, 12vw, 10rem) !important; /* responsive huge font */
-  text-align: center !important;
-  line-height: 1.1 !important;
-  margin: 0 !important;           /* reset any reset overrides */
-  color: #f5f5f5 !important;      /* ensure text color */
-  }
-
-
-
-  .about-text {
-    font-size: 1.1rem !important;
-    line-height: 1.6 !important;
-    text-align: center !important;
-    width: 50% !important;
-  }
-
-  /* 3. CARD STACKING (SERVICES) */
-  /* Remove grid, force single column list */
+  /* Disable sticky everywhere */
+  .about-description,
   .services-list,
+  .service-card {
+    position: static !important;
+    top: auto !important;
+    height: auto !important;
+  }
+
+  /* Services become list */
+  .services-list {
+    overflow: visible;
+  }
+
   .services-content {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important; /* Let margins handle spacing for finer control */
-    width: 100% !important;  
+    gap: 1rem;
+    padding-bottom: 0;
   }
 
   .service-card {
-    width: 100% !important;
-    
-    /* Reduced margin between cards (was 1.5rem) */
-    margin: 0 auto 0.8rem auto !important; 
-    
-    /* Reduced internal padding (was 1.5rem) */
-    padding: 1rem !important; 
-    
-    /* Ensure height wraps content tightly */
-    height: auto !important; 
-    min-height: 0 !important; 
-    
-    border-radius: 12px !important;
-    position: relative !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;  }
-
-  /* Remove margin from last card */
-.service-card:last-child {
-    margin-bottom: 0 !important;
+    width: 100%;
+    padding: 1.2rem;
+    border-radius: 14px;
+    margin-bottom: 0.8rem;
   }
 
+  .services-title {
+    font-size: 1.2rem;
+  }
+
+  .services-text {
+    font-size: 0.95rem;
+  }
+}
+
+  .normal-scroll-section {
+  position: relative; /* Restores normal document flow */
+  z-index: 10; /* Ensures it slides OVER the sticky intro */
+  background-color: var(--bg-main); /* Crucial: Must be opaque so Intro doesn't show through */
+  width: 100%;
+  
+  /* Allows the content to determine height */
+  height: auto; 
+  min-height: 100vh;
+  
+  /* Allows page scroll, hides horizontal overflow */
+  overflow-y: visible; 
+  overflow-x: hidden;
+  }
+
+  .timeline-main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
   /* TIMELINE CENTERING */
   .timeline {
-    margin-top: 2rem !important;
-    padding: 0 0.5rem !important;
-    width: 100% !important;
+  width: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* 🔥 CRITICAL FIX: Add padding so hover effects don't touch the screen edge */
+  padding: 2rem 1.5rem !important; 
+  
+  /* Ensure overflow is visible so shadows/popouts show */
+  overflow: visible !important;
+  }
+
+  .timeline-item-wrapper {
+  width: 100%;
+  position: relative;
+  /* Ensure no overflow hidden here */
+  overflow: visible; 
+  /* Fix z-index stacking context if needed */
+  z-index: 1; 
+  }
+
+  .timeline-heading {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 3rem; /* Spacing between heading and timeline */
+  color: #fff; /* Adjust based on your theme */
   }
 
   /* BUTTONS & INTERACTIONS */
@@ -2906,7 +2336,6 @@ html {
     filter: blur(50px) !important;
     opacity: 0.4 !important; /* Slightly lower opacity for cleaner mobile look */
   }
-}
 
 /* ===================================================== */
 /* ULTRA-NARROW DEVICES FIX (max-width: 360px)           */
@@ -2967,6 +2396,7 @@ html {
   .achievement-hover-info {
     display: none !important;
   }
+
 }
 
 /* Desktop hides mobile version */

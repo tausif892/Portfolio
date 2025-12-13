@@ -92,6 +92,18 @@ const projects: Project[] = [
     description:
       "A university club attendance management system with analytics and events.",
   },
+  {
+    title: "Ind2B - B2B Ecommerce platform",
+    coverImage: "/projects/momopay/cover.png",
+    images: [
+      "/projects/momppay/cover.png",
+    ],
+    category: 'frontend',
+    github: "https://github.com/tausif892/Momopay-Backend",
+    techStack: ["React"],
+    description:
+      "B2B ECommerce platform bridging the gap between the sellers and wholesalers",
+  }
 ];
 
 export default function ProjectsSection() {
