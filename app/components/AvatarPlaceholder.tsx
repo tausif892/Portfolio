@@ -106,7 +106,7 @@ function RotateCube() {
 // --- Main Avatar component ---
 export default function Avatar() {
   return (
-    <div style={{ width: "450px", height: "450px" }}>
+    <div className="avatar-canvas-container">
       <Canvas camera={{ position: [14, 14, 14], fov: 20 }}>
         {/* Lights */}
         <ambientLight intensity={0.5} />

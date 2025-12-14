@@ -344,6 +344,7 @@ body::after {
 .sticky-section {
   position: sticky;
   top: 0;
+  height: ;
   height: 100vh;
   background: var(--bg-main);
   overflow: hidden; /* prevents weird jumps */
@@ -610,112 +611,6 @@ body::after {
 /*          MOBILE VIEW          */
 /* ============================= */
 
-@media (max-width: 768px) {
-  .about-text-section {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    gap: 2rem;
-    padding: 0 1.5rem;
-  }
-
-  .about-text-left,
-  .about-text-content {
-    width: 100%;
-    text-align: center;
-  }
-
-  .about-text-title {
-    font-size: clamp(2rem, 8vw, 3.2rem);
-  }
-
-  .about-text {
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-text-section {
-    padding: 0 1rem;
-  }
-
-  .about-text-title {
-    font-size: 1.6rem;
-  }
-
-  .about-text {
-    font-size: 1rem;
-  }
-}
-
-/* ============= MOBILE FIXES ============= */
-@media (max-width: 768px) {
-
-  .hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem 1rem;
-  }
-
-  .hero-left {
-    max-width: 100%;
-    padding-bottom: 0;
-  }
-
-  .hero-greeting {
-    font-size: 2.8rem; /* Bigger greeting */
-    text-align: center;
-  }
-
-  .hero-name {
-    font-size: 3.5rem;
-    line-height: 1.2;
-    width: 100%;
-    text-align: center;
-  }
-
-  .hero-role {
-    font-size: 2rem;
-    text-align: center;
-  }
-
-  .hero-description {
-    max-width: 100%;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Buttons stack vertically */
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.75rem;
-    margin-top: 2rem;
-  }
-
-  .hero-buttons .btn-primary,
-  .hero-buttons .btn-outline {
-    width: 100%;
-    text-align: center;
-  }
-
-  /* Right side canvas moves below */
-  .hero-right {
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin-top: 2rem;
-  }
-
-  .hero-right::before {
-    inset: -20px; /* Slightly reduced glow */
-    padding-bottom: 120px;
-  }
-}
 
 
 /* ============================= */
@@ -880,8 +775,133 @@ body::after {
   filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.6));
 }
 
+/* ============================= */
+/* MOBILE GRID (2 COLUMNS)       */
+/* ============================= */
 
-/* TIMELINE line */
+/* ========================================= */
+/* MOBILE OVERRIDES (Add to bottom of CSS)   */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* 1. Un-restrict the container height */
+  /* On mobile, text wraps and gets taller. We must allow the 
+     section to grow, otherwise overflow:hidden chops it off. */
+  .sticky-section-about-text {
+    height: auto !important;      /* Override 55vh */
+    min-height: 50vh;             /* Ensure it's still substantial */
+    overflow: visible !important; /* Allow content to spill if needed */
+    padding-bottom: 3rem;
+  }
+
+  /* 2. Stack the layout vertically */
+  .about-text-section {
+    flex-direction: column;       /* Stack Top-to-Bottom instead of Left-to-Right */
+    min-width: 0 !important;      /* Remove the 60vh limit */
+    width: 100%;
+    margin-top: 2rem;
+    gap: 1.5rem;
+    padding: 0 1.5rem;            /* Safe padding for edges */
+  }
+
+  /* 3. Fix Column Widths */
+  /* The original min-width: 300px breaks small screens (360px). 
+     We reset it to let them shrink. */
+  .about-text-left, 
+  .about-text-right {
+    width: 100%;
+    min-width: 0 !important;      /* CRITICAL FIX for <360px screens */
+    align-items: center;          /* Center align everything */
+    height: auto;
+  }
+
+  /* 4. Center the Title */
+  .about-text-title {
+    text-align: center;
+    font-size: 2.5rem;            /* Make it slightly smaller for mobile */
+  }
+
+  /* Center the red underline */
+  .about-text-title::after {
+    margin: 10px auto 0;
+  }
+
+  /* 5. Allow Text to expand */
+  .about-text-content {
+    width: 100%;                  /* Take full width of the phone */
+    max-width: 100%;
+    text-align: center;           /* Center text looks better in vertical stack */
+    font-size: 1rem;
+  }
+
+  /* 6. Button positioning */
+  .about-text-button {
+    width: 100%;                  /* Make button easy to tap */
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 1. Reduce outer padding to give grid more width */
+  .sticky-section {
+    position: relative;
+    height: auto;
+  }
+
+  .sticky-section-about-text {
+    position: relative;
+    height: auto;
+  }
+
+  .projects-home {
+    position: relative;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  /* 2. Switch container from Scroll to Grid */
+  .projects-home-scroll {
+    display: grid;
+    /* Force 2 equal columns */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 0.75rem;
+    
+    /* Disable the horizontal scroll logic */
+    overflow-x: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+  }
+
+  /* 3. Adjust Card to be fluid instead of fixed width */
+  .project-home-card {
+    width: 100%; /* Fill the grid cell */
+    height: 100%; /* Stretch to match neighbor */
+    min-height: 190px; /* Prevent it from being too squashed */
+    padding: 0.85rem; /* Reduce internal padding */
+  }
+
+  /* 4. Scale down text for narrow columns */
+  .project-home-title {
+    font-size: 0.9rem; /* Smaller title */
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+
+  /* 5. Tweak tech pills to fit */
+  .project-home-tech-list {
+    gap: 0.35rem;
+  }
+
+  .project-home-tech {
+    font-size: 0.65rem; /* Smaller text */
+    padding: 0.2rem 0.4rem; /* Smaller pill */
+  }
+}
+
+
+/* F line */
 .timeline {
   position: relative;
   width: 100%;
@@ -968,10 +988,6 @@ body::after {
 .desktop-only { display: block; }
 .mobile-only { display: none; }
 
-@media (max-width: 768px) {
-  .desktop-only { display: none; }
-  .mobile-only { display: block; }
-}
 
 /* LEFT side timeline */
 .container.left .achievement-hover-info {
@@ -2221,50 +2237,6 @@ body::after {
 /* MOBILE — LIST MODE (NO STICKY)                        */
 /* ===================================================== */
 
-@media (max-width: 365px) {
-
-  /* Flatten layout */
-  .about-section {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem ;
-    gap: 2rem;
-  }
-
-  /* Disable sticky everywhere */
-  .about-description,
-  .services-list,
-  .service-card {
-    position: static !important;
-    top: auto !important;
-    height: auto !important;
-  }
-
-  /* Services become list */
-  .services-list {
-    overflow: visible;
-  }
-
-  .services-content {
-    gap: 1rem;
-    padding-bottom: 0;
-  }
-
-  .service-card {
-    width: 100%;
-    padding: 1.2rem;
-    border-radius: 14px;
-    margin-bottom: 0.8rem;
-  }
-
-  .services-title {
-    font-size: 1.2rem;
-  }
-
-  .services-text {
-    font-size: 0.95rem;
-  }
-}
 
   .normal-scroll-section {
   position: relative; /* Restores normal document flow */
@@ -2338,70 +2310,88 @@ body::after {
   }
 
 /* ===================================================== */
-/* ULTRA-NARROW DEVICES FIX (max-width: 360px)           */
-/* Refinements for small phones (Galaxy Fold, SE, etc)   */
+/* HERO — MOBILE VERSION (≤ 360px)                       */
 /* ===================================================== */
 @media (max-width: 360px) {
-  .about-text {
-    font-size: 1rem !important;
+
+  /* ---------- HERO LAYOUT ---------- */
+  .hero {
+    width: 100%;
+    padding: 5rem 1rem 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    min-height: auto;
+    overflow-x: hidden;
   }
 
-  .about-text-title {
-    font-size: 1.4rem !important;
+  /* ---------- LEFT CONTENT ---------- */
+  .hero-left {
+    width: 100%;
+    order: 1;
+    justify-content: flex-start;
   }
 
-  .service-card {
-    padding: 1rem !important;
+  .hero-greeting {
+    font-size: 2rem;
+  }
+
+  .hero-name {
+    font-size: 2.4rem;
+  }
+
+  .hero-role {
+    font-size: 1.4rem;
+  }
+
+  .hero-description {
+    max-width: 100%;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- BUTTONS (STACKED) ---------- */
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ---------- RIGHT / CUBE ---------- */
+  .hero-right {
+    display: none;
+  }
+
+  /* ---------- GLOW ---------- */
+  .hero-glow {
+    width: 260px;
+    height: 260px;
+    filter: blur(90px);
+  }
+
+  /* ---------- AVATAR / CANVAS ---------- */
+  .hero-avatar {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .hero-right canvas {
+    width: 100% !important;
+    height: auto !important;
+    border-radius: 14px;
+    align-items: center;
+    display: block;
   }
 }
 
-/* Hide desktop version on mobile */
-@media (max-width: 768px) {
-  .desktop-only {
-    display: none !important;
-  }
 
-  .mobile-only {
-    display: block !important;
-  }
-
-  .mobile-timeline-item {
-    background: #111;
-    border-radius: 12px;
-    margin-bottom: 1rem;
-    padding: 1rem;
-  }
-
-  .mobile-title {
-    cursor: pointer;
-  }
-
-  .mobile-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-
-  .mobile-details.open {
-    max-height: 500px;
-    margin-top: 0.75rem;
-  }
-
-  .mobile-details-inner {
-    color: #ccc;
-    padding-bottom: 0.5rem;
-  }
-
-  /* Remove hover tooltip spacing issues */
-  .achievement-hover-info {
-    display: none !important;
-  }
-
-}
-
-/* Desktop hides mobile version */
-@media (min-width: 769px) {
-  .mobile-only {
-    display: none !important;
-  }
-}
