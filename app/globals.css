@@ -2394,4 +2394,161 @@ body::after {
   }
 }
 
+/* ===================================================== */
+/* MOBILE GRID SERVICES — PORTFOLIO STYLE                */
+/* ===================================================== */
+@media (max-width: 768px) {
+
+  .sticky-section-about-page {
+    position: relative;
+    height: auto;
+  }
+  /* ABOUT LAYOUT */
+  .about-section {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 1.2rem;
+    gap: 2rem;
+  }
+
+  /* TEXT PANEL */
+  .about-description {
+    position: relative;
+    top: auto;
+    max-width: none;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .about-description h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-description p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* GRID */
+  .services-list {
+    height: auto;
+    overflow: visible;
+  }
+
+  .services-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* GRID CARDS */
+  .service-card {
+    position: relative !important;
+    top: auto !important;
+    height: auto;
+    min-height: 88px;
+    padding: 1.2rem;
+    border-radius: 16px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  .service-card:nth-child(n) {
+    z-index: auto;
+    top: auto;
+  }
+
+  /* ACTIVE CARD */
+  .service-card.active {
+    border-color: rgba(239, 68, 68, 0.7);
+    box-shadow:
+      0 0 0 1px rgba(239, 68, 68, 0.5),
+      0 12px 30px rgba(0, 0, 0, 0.6);
+  }
+
+  .services-title {
+    font-size: 1rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+/* ===================================================== */
+/* MOBILE TIMELINE — LIST + SLIDE FROM BEHIND            */
+/* ===================================================== */
+@media (max-width: 768px) {
+
+  /* VISIBILITY CONTROL */
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  /* TIMELINE LAYOUT */
+  .timeline {
+    padding: 0.5rem 1rem !important;
+    gap: 1.2rem;
+  }
+
+  /* ITEM WRAPPER */
+  .mobile-timeline-item {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0f0f0f;
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.55);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .mobile-timeline-item.open {
+    box-shadow:
+      0 18px 45px rgba(0, 0, 0, 0.75);
+  }
+
+  /* FRONT CARD */
+  .mobile-timeline-card {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  /* HIDDEN DETAILS */
+  .mobile-timeline-details {
+    background: linear-gradient(
+      180deg,
+      #121212,
+      #0a0a0a
+    );
+    padding: 0 1.2rem;
+    max-height: 0;
+    overflow: hidden;
+
+    transform: translateY(-12px);
+    opacity: 0;
+
+    transition:
+      max-height 0.45s ease,
+      transform 0.35s ease,
+      opacity 0.3s ease;
+  }
+
+  /* OPEN STATE */
+  .mobile-timeline-item.open .mobile-timeline-details {
+    max-height: 260px;
+    padding: 1rem 1.2rem 1.4rem;
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .mobile-timeline-details {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d0d0d0;
+  }
+}
 

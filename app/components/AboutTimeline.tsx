@@ -10,8 +10,10 @@ type Service = {
 
 export function Services({
   onActiveChange,
+  activeTitle,
 }: {
   onActiveChange: (service: Service) => void;
+  activeTitle: string;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -42,10 +44,10 @@ export function Services({
     },
   ];
 
-  /* ================================
-      SMOOTH SCROLL
-  ================================= */
+  /* DESKTOP SMOOTH SCROLL ONLY */
   useEffect(() => {
+    if (window.innerWidth <= 768) return;
+
     const container = containerRef.current;
     const content = contentRef.current;
     if (!container || !content) return;
@@ -60,7 +62,7 @@ export function Services({
     const animate = () => {
       current += (target - current) * 0.12;
       container.scrollTop = current;
-      detectActiveCard(); // 🔥 IMPORTANT
+      detectActiveCard();
 
       if (Math.abs(target - current) > 0.5) {
         raf = requestAnimationFrame(animate);
@@ -87,29 +89,16 @@ export function Services({
     };
   }, []);
 
-  /* ================================
-      ACTIVE CARD DETECTION (FIXED)
-  ================================= */
   const detectActiveCard = () => {
     const container = containerRef.current;
     if (!container) return;
 
     const containerTop = container.getBoundingClientRect().top;
-    
-    // We default to the first card
     let activeIdx = 0;
-
-    // A small buffer (offset) ensures the text changes slightly before 
-    // or exactly when it locks into place.
-    const offset = 20; 
 
     cardRefs.current.forEach((card, i) => {
       const rect = card.getBoundingClientRect();
-      
-      // LOGIC: Check if the card's top edge has reached the container's top edge.
-      // Since we are iterating in order (0 to 5), if Card 2 satisfies this, 
-      // it overwrites Card 1. This ensures the "top-most" visual card is selected.
-      if (rect.top <= containerTop + offset + (i+5)*90) {
+      if (rect.top <= containerTop + 120) {
         activeIdx = i;
       }
     });
@@ -131,12 +120,14 @@ export function Services({
             ref={(el) => {
               if (el) cardRefs.current[i] = el;
             }}
-            className="service-card"
+            className={`service-card ${
+              activeTitle === s.title ? "active" : ""
+            }`}
+            onClick={() => onActiveChange(s)}
           >
             <h3 className="services-title">{s.title}</h3>
           </div>
         ))}
-        <div style={{ height: "50vh" }} />
       </div>
     </div>
   );

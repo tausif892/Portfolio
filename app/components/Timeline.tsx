@@ -3,17 +3,26 @@
 import { useState } from "react";
 import { AchievementBox } from "./MileStone";
 
-function MobileItem({ children }: any) {
+function MobileTimelineItem({ year, title, description, details }: any) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mobile-timeline-item">
-      <div className="mobile-title" onClick={() => setOpen(!open)}>
-        {children.titleComponent}
+    <div className={`mobile-timeline-item ${open ? "open" : ""}`}>
+      {/* FRONT CARD */}
+      <div
+        className="mobile-timeline-card"
+        onClick={() => setOpen(!open)}
+      >
+        <AchievementBox
+          year={year}
+          title={title}
+          description={description}
+        />
       </div>
 
-      <div className={`mobile-details ${open ? "open" : ""}`}>
-        {children.detailsComponent}
+      {/* REVEALED CONTENT (FROM BEHIND) */}
+      <div className="mobile-timeline-details">
+        {details}
       </div>
     </div>
   );
@@ -65,47 +74,32 @@ export function TimeLine() {
 
   return (
     <section className="timeline-main">
-      {/* 👇 Added Heading Here */}
       <h2 className="timeline-heading">My Journey</h2>
 
       <div className="timeline">
         {items.map((item, idx) => (
-          <TimelineItem
-            key={idx}
-            data={item}
-            side={idx % 2 === 0 ? "left" : "right"}
-          />
+          <div className="timeline-item-wrapper" key={idx}>
+            {/* DESKTOP — UNCHANGED */}
+            <div className={`container ${idx % 2 === 0 ? "left" : "right"} desktop-only`}>
+              <div className="achievement-hover">
+                <AchievementBox
+                  year={item.year}
+                  title={item.title}
+                  description={item.description}
+                />
+                <div className="achievement-hover-info">
+                  {item.details}
+                </div>
+              </div>
+            </div>
+
+            {/* MOBILE */}
+            <div className="mobile-only">
+              <MobileTimelineItem {...item} />
+            </div>
+          </div>
         ))}
       </div>
     </section>
-  );
-}
-
-function TimelineItem({ data, side }: any) {
-  const { year, title, description, details } = data;
-
-  return (
-    /* 🔴 CHANGED: specific class instead of <main> */
-    <div className="timeline-item-wrapper"> 
-      {/* DESKTOP */}
-      <div className={`container ${side} desktop-only`}>
-        <div className="achievement-hover">
-          <AchievementBox year={year} title={title} description={description} />
-          <div className="achievement-hover-info">{details}</div>
-        </div>
-      </div>
-
-      {/* MOBILE */}
-      <div className="mobile-only">
-        <MobileItem
-          children={{
-            titleComponent: (
-              <AchievementBox year={year} title={title} description={description} />
-            ),
-            detailsComponent: <div className="mobile-details-inner">{details}</div>,
-          }}
-        />
-      </div>
-    </div>
   );
 }

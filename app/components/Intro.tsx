@@ -6,19 +6,23 @@ import { Services } from "./AboutTimeline";
 export function AboutMe() {
   const [activeService, setActiveService] = useState({
     title: "Backend Developer",
-    text: "I am a backend developer"});
+    text: "I am a backend developer",
+  });
 
   return (
     <section className="about-section">
 
-      {/* RIGHT / TEXT SIDE */}
+      {/* MOBILE + DESKTOP DESCRIPTION */}
       <div className="about-description">
         <h2>{activeService.title}</h2>
         <p>{activeService.text}</p>
       </div>
 
       {/* SERVICES */}
-      <Services onActiveChange={setActiveService} />
+      <Services
+        onActiveChange={setActiveService}
+        activeTitle={activeService.title}
+      />
 
     </section>
   );
