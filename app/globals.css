@@ -344,7 +344,6 @@ body::after {
 .sticky-section {
   position: sticky;
   top: 0;
-  height: ;
   height: 100vh;
   background: var(--bg-main);
   overflow: hidden; /* prevents weird jumps */
@@ -365,27 +364,94 @@ body::after {
 
 
 .hero {
-  width: 90%;
-  padding: 1.5rem;
+  background:
+    radial-gradient(
+      800px circle at 85% 70%,
+      rgba(239, 68, 68, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      600px circle at 15% 30%,
+      rgba(239, 68, 68, 0.10),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(0, 0, 0, 0.25)
+    );
+  background-color:transparent;
+  width: 100%;
+  height: 98vh;
   display: flex;
-  height: auto; /* auto so height fits content */
   justify-content: space-between;
-  align-items: flex-end; /* Align both columns to bottom */
+  padding-left: 5;
+  align-items: center; /* Align both columns to bottom */
   min-height: 50vh; /* optional, adjust based on desired section size */
   position: relative;
+  overflow: visible;
+  padding-left: clamp(2rem, 6vw, 6rem);
 }
+
+/* ================================
+   ROLE & DESCRIPTION TRANSITIONS
+================================ */
+
+/* Wrapper keeps layout stable */
+.role-wrapper {
+  position: relative;
+  min-height: 4.5rem; /* prevents layout jump */
+}
+
+/* ROLE animation */
+.role-animate {
+  animation: roleIn 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* DESCRIPTION animation */
+.desc-animate {
+  animation: descIn 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================================
+   KEYFRAMES
+================================ */
+
+@keyframes roleIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes descIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* LEFT COLUMN */
 .hero-left {
   width: 50%;
-  display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* push text to bottom */
+  padding-left: 0.8;
 }
 
 .hero-greeting {
   padding-bottom: 0.rem;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 600;
 }
 
@@ -394,7 +460,7 @@ body::after {
 }
 
 .hero-name {
-  font-size: 3.75rem;
+  font-size: 5rem;
   font-weight: 700;
   line-height: 1.1;
 }
@@ -423,6 +489,94 @@ body::after {
   margin-top: 2rem;
 }
 
+/* ================================
+   HERO ENTRY ANIMATIONS
+================================ */
+
+.hero-enter {
+  animation: fadeIn 3.6s ease forwards;
+}
+
+.hero-slide-up {
+  animation: slideUp 2s ease forwards;
+}
+
+.hero-scale-in {
+  animation: scaleIn 3.6s ease forwards;
+}
+
+.hero-fade-in {
+  animation: fadeIn 3.6s ease forwards;
+}
+
+/* ROLE TRANSITION */
+.role-transition {
+  animation: roleFade 0.8s ease;
+}
+
+/* TYPEWRITER CURSOR */
+.cursor {
+  margin-left: 2px;
+  color: #ef4444;
+  animation: blink 1s infinite;
+}
+
+/* ================================
+   KEYFRAMES
+================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes roleFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+
 /* BUTTONS */
 .btn-primary {
   background-color: #ef4444;
@@ -450,35 +604,48 @@ body::after {
 }
 
 /* RIGHT COLUMN */
-.hero-right {
-  padding-top: 3rem;
+.hero-right.canvas {
   width: 50%;
+  padding: auto;
+  min-width: 500px;
+  min-height: 500px;
   display: flex;
-  align-items: flex-end; /* align cube to bottom */
+  align-items: end;
+  justify-content: end;
   position: relative;
-  height: calc(); /* adjusts with content */
+  overflow: visible;
+}
+
+.avatar-canvas-container {
+  padding: auto;
+  width: 500px !important;
+  height: 500px !important;
+  overflow: visible;
 }
 
 /* Glow behind cube */
 .hero-glow {
-  position: relative;
-  bottom: 0; /* stick to bottom */
+  position: absolute; /* ✔ correct */
+  bottom: -80px;      /* allow glow to extend */
   left: 50%;
   transform: translateX(-50%);
-  width: 450px;  /* adjust size to match cube */
+  width: 450px;
   height: 450px;
   border-radius: 50%;
   background: rgba(239, 68, 68, 0.25);
   filter: blur(120px);
-  z-index: 0; /* behind cube */
+  z-index: 0;
   pointer-events: none;
 }
 
 /* Cube / Canvas */
+/* Cube / Canvas - Let it scale naturally */
 .hero-right canvas {
+  max-width: 100%;
+  max-height: 100%;
   border-radius: 16px;
   mix-blend-mode: lighten;
-  z-index: 1; /* in front of glow */
+  z-index: 1;
 }
 
 /* Optional floating animation for cube */
@@ -2109,133 +2276,165 @@ body::after {
     #0a0a0a;
 }
 
-/* REMOVE OLD SPLIT BEHAVIOR */
-.about-left,
-.about-right {
-  width: auto;
-  padding: 0;
-  height: auto;
-}
+/* =====================================================
+   SERVICES — ROW BASED INTERACTIVE LAYOUT
+===================================================== */
 
-/* Disable old scroll areas */
-.about-left {
-  overflow: visible;
-}
-
-/* ===================================================== */
-/* DESCRIPTION PANEL (LEFT CONTENT)                      */
-/* ===================================================== */
-
-.about-description {
-  position: sticky;
-  top: 10%;
-  max-width: 560px;
-}
-
-.about-description h2 {
-  font-size: clamp(2.4rem, 3vw, 3rem);
+.services-title-main {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 700;
-  margin-bottom: 1.2rem;
   color: #ffffff;
+  margin-bottom: 3rem;
 }
 
-.about-description p {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: #cfcfcf;
+.services-row-section {
+  width: 200vh;
+  padding: 0.2rem clamp(1.5rem, 6vw, 6rem);
+  background:
+    radial-gradient(
+      800px circle at 85% 70%,
+      rgba(239, 68, 68, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      600px circle at 15% 30%,
+      rgba(239, 68, 68, 0.10),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(0, 0, 0, 0.25)
+    );
 }
 
-/* ===================================================== */
-/* SERVICES — STICKY STACK                               */
-/* ===================================================== */
-
-.services-list {
+.services-row-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  align-items: flex-start;
-  justify-content: flex-start;
+  gap: 1rem;
+}
+
+/* =====================================================
+   SERVICE ROW
+===================================================== */
+
+.service-row {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr 0fr;
+  align-items: center;
+
+  padding: 1.25rem 1.5rem;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #141414, #0e0e0e);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  cursor: pointer;
   overflow: hidden;
-}
-
-.services-content {
-  display: flex;
-  flex-direction: column;
-  gap: 90vh;
-  padding-bottom: 120px;
-}
-
-/* ===================================================== */
-/* SERVICE CARDS                                         */
-/* ===================================================== */
-
-.service-card {
-  height: 80vh;
-  padding: 2.8rem;
-  position: sticky;
-  top: 90px;
-
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border-radius: 22px;
-  border: 1px solid rgba(220, 38, 38, 0.18);
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(220, 38, 38, 0.1) inset;
 
   transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease,
-    border-color 0.4s ease;
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
 }
 
-/* Layered stop effect */
-.service-card:nth-child(1) { z-index: 1; }
-.service-card:nth-child(2) { z-index: 2; top: 190px; }
-.service-card:nth-child(3) { z-index: 3; top: 290px; }
-.service-card:nth-child(4) { z-index: 4; top: 390px; }
-.service-card:nth-child(5) { z-index: 5; top: 490px; }
-
-/* Hover highlight */
-.service-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(220, 38, 38, 0.5);
-  box-shadow:
-    0 22px 70px rgba(0, 0, 0, 0.75),
-    0 0 30px rgba(220, 38, 38, 0.2);
+/* Hover hint */
+.service-row:hover {
+  border-color: rgba(239, 68, 68, 0.35);
 }
 
-/* ===================================================== */
-/* SERVICE TEXT                                          */
-/* ===================================================== */
+/* =====================================================
+   TITLE (CENTER → LEFT)
+===================================================== */
 
-.services-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #f5f5f5;
-  padding-bottom: 0.8rem;
-  margin-bottom: 1.2rem;
-  border-bottom: 1px solid rgba(220, 38, 38, 0.25);
-}
+.service-row-title {
+  grid-column: 1 / -1; /* spans entire row */
+  text-align: center;
 
-.services-text {
   font-size: 1.05rem;
-  line-height: 1.65;
-  color: #bdbdbd;
+  font-weight: 600;
+  color: #f1f1f1;
+
+  transition:
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    text-align 0.45s ease;
 }
 
-/* ===================================================== */
-/* MOBILE — LIST MODE (NO STICKY)                        */
-/* ===================================================== */
+/* =====================================================
+   TECH STACK (HIDDEN INITIALLY)
+===================================================== */
+
+.service-row-tech {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+
+  opacity: 0;
+  transform: translateX(-12px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+/* =====================================================
+   ACTIVE STATE
+===================================================== */
+
+.service-row.active {
+  grid-template-columns: 260px 1fr;
+  border-color: #ef4444;
+  box-shadow:
+    0 0 0 1px rgba(239, 68, 68, 0.5),
+    0 20px 40px rgba(239, 68, 68, 0.2);
+}
+
+/* Title moves left */
+.service-row.active .service-row-title {
+  grid-column: 1 / 2;
+  text-align: left;
+  transform: translateX(0);
+}
+
+/* Tech appears */
+.service-row.active .service-row-tech {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+/* =====================================================
+   TECH TAGS
+===================================================== */
+
+.service-row-tech span {
+  font-size: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 700px) {
+  .service-row.active {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .service-row-title {
+    text-align: center !important;
+  }
+}
 
 
   .normal-scroll-section {
@@ -2257,6 +2456,22 @@ body::after {
     position: relative;
     height: 100%;
     width: 100%;
+    background:
+    radial-gradient(
+      800px circle at 85% 70%,
+      rgba(239, 68, 68, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      600px circle at 15% 30%,
+      rgba(239, 68, 68, 0.10),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      rgba(0, 0, 0, 0.25)
+    );
     overflow-y: visible;
     overflow-x: hidden;
   }
@@ -2365,33 +2580,31 @@ body::after {
 
   /* ---------- RIGHT / CUBE ---------- */
   .hero-right {
+    width: 1500px;
+    height: 1500px;
     display: none;
   }
 
   /* ---------- GLOW ---------- */
   .hero-glow {
-    width: 260px;
-    height: 260px;
     filter: blur(90px);
   }
 
   /* ---------- AVATAR / CANVAS ---------- */
-  .hero-avatar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    max-width: 320px;
-    margin: 0 auto;
-  }
+.hero-avatar {
+  width: 1000px;
+  height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .hero-right canvas {
-    width: 100% !important;
-    height: auto !important;
-    border-radius: 14px;
-    align-items: center;
-    display: block;
-  }
+/* IMPORTANT: allow overflow */
+.avatar-canvas-container {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
 }
 
 /* ===================================================== */
@@ -2403,76 +2616,38 @@ body::after {
     position: relative;
     height: auto;
   }
-  /* ABOUT LAYOUT */
-  .about-section {
-    display: flex;
-    flex-direction: column;
-    padding: 3rem 1.2rem;
-    gap: 2rem;
-  }
+/* ================================
+   ABOUT LAYOUT
+================================ */
 
-  /* TEXT PANEL */
-  .about-description {
-    position: relative;
-    top: auto;
-    max-width: none;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .about-description h2 {
-    font-size: 1.8rem;
-  }
-
-  .about-description p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  /* GRID */
-  .services-list {
-    height: auto;
-    overflow: visible;
-  }
-
-  .services-content {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  /* GRID CARDS */
-  .service-card {
-    position: relative !important;
-    top: auto !important;
-    height: auto;
-    min-height: 88px;
-    padding: 1.2rem;
-    border-radius: 16px;
-    cursor: pointer;
-    text-align: center;
-  }
-
-  .service-card:nth-child(n) {
-    z-index: auto;
-    top: auto;
-  }
-
-  /* ACTIVE CARD */
-  .service-card.active {
-    border-color: rgba(239, 68, 68, 0.7);
-    box-shadow:
-      0 0 0 1px rgba(239, 68, 68, 0.5),
-      0 12px 30px rgba(0, 0, 0, 0.6);
-  }
-
-  .services-title {
-    font-size: 1rem;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
+.about-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1.2rem 1.2rem;
+  gap: 2rem;
 }
+
+/* ================================
+   TEXT PANEL
+================================ */
+
+.about-description {
+  position: relative;
+  max-width: 680px;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.about-description h2 {
+  font-size: 1.8rem;
+}
+
+.about-description p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 
 /* ===================================================== */
 /* MOBILE TIMELINE — LIST + SLIDE FROM BEHIND            */
@@ -2551,4 +2726,4 @@ body::after {
     color: #d0d0d0;
   }
 }
-
+}

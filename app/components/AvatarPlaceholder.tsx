@@ -89,6 +89,7 @@ function RotateCube() {
   return (
     <mesh
       ref={cubeRef}
+      scale={1.4}
       material={materials}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
@@ -107,14 +108,14 @@ function RotateCube() {
 export default function Avatar() {
   return (
     <div className="avatar-canvas-container">
-      <Canvas camera={{ position: [14, 14, 14], fov: 20 }}>
+      <Canvas camera={{ position: [18, 18, 18], fov: 30, near: 0.1, far: 100 }}>
         {/* Lights */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[-6, 3, -6]} intensity={0.3} color="#ff2a2a" />
-        <pointLight position={[5, 5, 5]} intensity={0.8} />
+        <pointLight position={[2, 2, 2]} intensity={0.8} />
 
         {/* Controls (disabled rotation) */}
-        <OrbitControls enableZoom={false} enableRotate={false} />
+        <OrbitControls enableZoom={true} enableRotate={false} />
 
         {/* Rotating glowing cube */}
         <RotateCube />
