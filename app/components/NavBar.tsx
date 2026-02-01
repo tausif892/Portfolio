@@ -15,7 +15,6 @@ export default function Navbar() {
         <div className="navbar-links">
           {[
             { label: "Home", href: "/" },
-            { label: "About Me", href: "/about" },
             { label: "My Projects", href: "/projects" },
           ].map((item) => (
             <button
