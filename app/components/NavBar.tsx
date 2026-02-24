@@ -1,15 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="navbar-container">
+    <header className={`navbar-container${scrolled ? " navbar-scrolled" : ""}`}>
       <nav className="navbar">
-        <span className="navbar-logo">Tausif</span>
+        {/* Logo */}
+        <span className="navbar-logo">
+          <span className="navbar-logo-accent">T.</span>ausif
+        </span>
 
         {/* Desktop Menu */}
         <div className="navbar-links">
@@ -25,6 +35,12 @@ export default function Navbar() {
               <span className="nav-underline">{item.label}</span>
             </button>
           ))}
+          <a
+            href="mailto:tausifyourmail@gmail.com?subject=Project Collaboration"
+            className="nav-cta"
+          >
+            Let's Talk →
+          </a>
         </div>
 
         {/* Hamburger Icon */}
@@ -40,7 +56,6 @@ export default function Navbar() {
         <div className="mobile-menu">
           {[
             { label: "Home", href: "/" },
-            { label: "About Me", href: "/about" },
             { label: "My Projects", href: "/projects" },
           ].map((item) => (
             <button
@@ -54,6 +69,13 @@ export default function Navbar() {
               {item.label}
             </button>
           ))}
+          <a
+            href="mailto:tausifyourmail@gmail.com?subject=Project Collaboration"
+            className="mobile-nav-btn"
+            style={{ color: "#ef4444" }}
+          >
+            Let's Talk →
+          </a>
         </div>
       )}
     </header>

@@ -1,22 +1,59 @@
 "use client";
-import { useState } from 'react';
 
 const skills = [
-  { name: "NodeJS", category: "Backend" },
-  { name: "ReactJS", category: "Frontend" },
-  { name: "Flutter", category: "Mobile" },
-  { name: "NextJS", category: "Frontend" },
-  { name: "Pandas", category: "Data Science" },
-  { name: "NumPy", category: "Data Science" },
-  { name: "TensorFlow", category: "AI/ML" },
-  { name: "Microsoft Azure", category: "Cloud" },
-  { name: "Google Cloud", category: "Cloud" },
-  { name: "Vercel", category: "Cloud" },
+  {
+    name: "Node.js",
+    category: "Backend",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+  },
+  {
+    name: "React",
+    category: "Frontend",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  },
+  {
+    name: "Flutter",
+    category: "Mobile",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+  },
+  {
+    name: "Next.js",
+    category: "Frontend",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+  },
+  {
+    name: "Pandas",
+    category: "Data Science",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
+  },
+  {
+    name: "NumPy",
+    category: "Data Science",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg",
+  },
+  {
+    name: "TensorFlow",
+    category: "AI / ML",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg",
+  },
+  {
+    name: "Azure",
+    category: "Cloud",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg",
+  },
+  {
+    name: "Google Cloud",
+    category: "Cloud",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+  },
+  {
+    name: "MongoDB",
+    category: "Database",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+  },
 ];
 
 export default function Skills() {
-  const [hoveredSkill, setHoveredSkill] = useState<number | null>(null);
-
   return (
     <div className="skills-section">
       {/* Title */}
@@ -26,37 +63,32 @@ export default function Skills() {
         </h2>
         <div className="skills-title-underline"></div>
         <p className="skills-subtitle">
-          A curated collection of technologies and frameworks I leverage to build exceptional digital experiences
+          Technologies and frameworks I use to build exceptional digital products
         </p>
       </div>
 
       {/* Skills Grid */}
       <div className="skills-grid">
         {skills.map((skill, idx) => (
-          <div
-            key={idx}
-            onMouseEnter={() => setHoveredSkill(idx)}
-            onMouseLeave={() => setHoveredSkill(null)}
-            className="skill-card"
-          >
+          <div key={idx} className="skill-card">
             {/* Glow effect on hover */}
             <div className="skill-card-glow"></div>
-            
+
             {/* Content */}
             <div className="skill-card-content">
               <div className="skill-icon">
-                <span className="skill-icon-text">
-                  {skill.name.substring(0, 2)}
-                </span>
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  width={36}
+                  height={36}
+                  className="skill-icon-img"
+                />
               </div>
-              
-              <h3 className="skill-name">
-                {skill.name}
-              </h3>
-              
-              <span className="skill-category-badge">
-                {skill.category}
-              </span>
+
+              <h3 className="skill-name">{skill.name}</h3>
+
+              <span className="skill-category-badge">{skill.category}</span>
             </div>
 
             {/* Corner accent */}
@@ -74,8 +106,8 @@ export default function Skills() {
             key={i}
             className="skills-pulse-dot"
             style={{
-              opacity: 0.3 + (i * 0.15),
-              animationDuration: `${2 + i * 0.3}s`
+              opacity: 0.3 + i * 0.15,
+              animationDuration: `${2 + i * 0.3}s`,
             }}
           ></div>
         ))}

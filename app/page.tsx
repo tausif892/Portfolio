@@ -5,6 +5,7 @@ import AboutText from "./components/AboutText";
 import ProjectsSection from "./components/ProjectsSection";
 import HeroSection from "./components/HeroSection";
 import Services from "./components/Services";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -21,12 +22,17 @@ export default function Home() {
       </section>
 
       <section className="sticky-section">
-        < Services />
+        <Services />
       </section>
 
-      <section className="sticky-section">
+      <section className="sticky-section-about-project">
         <ProjectsSection />
       </section>
+
+      <section className="sticky-section-footer">
+        <Footer />
+      </section>
+
     </main>
   );
 }
