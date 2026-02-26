@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 import NavBar from "../components/NavBar";
 import { ProjectCard } from "../components/ProjectCard";
 import { Project } from "../types/Project";
@@ -15,6 +15,7 @@ const projects: Project[] = [
       "/projects/attendance/3.png",
     ],
     github: "https://github.com/tausif892/NSS-Attendance-System",
+    url: "https://seva-nss-mit-manipal.vercel.app/",
     category: "Mobile, Backend, Cloud",
     techStack: ["Flutter", "Node.js", "MongoDB"],
     description:
@@ -32,7 +33,7 @@ const projects: Project[] = [
     ],
     category: 'Frontend, Backend, AI, Cloud',
     github: "https://github.com/tausif892/Chatroom-Frontend , https://github.com/tausif892/Chatroom-Backend",
-    techStack: ["React", "Node.js", "MongoDB", "FastAPI","Gemini","ChromaDB"],
+    techStack: ["React", "Node.js", "MongoDB", "FastAPI", "Gemini", "ChromaDB"],
     description:
       "A university club attendance management system with analytics and events.",
   },
@@ -47,7 +48,7 @@ const projects: Project[] = [
     ],
     category: 'Mobile, Backend, Frontend, AI',
     github: "https://github.com/tausif892/ReFL3KT_backend",
-    techStack: ["Flutter", "Node.js", "MongoDB","FastAPI"],
+    techStack: ["Flutter", "Node.js", "MongoDB", "FastAPI"],
     description:
       "A university club attendance management system with analytics and events.",
   },
@@ -61,7 +62,8 @@ const projects: Project[] = [
     ],
 
     category: 'Backend',
-    github: "https://www.bikingcommunityofindia.com/",
+    github: "https://github.com/tausif892/Save-earth-ride",
+    url: "https://www.bikingcommunityofindia.com/",
     techStack: ["React", "Node.js", "MongoDB"],
     description:
       "A university club attendance management system with analytics and events.",
@@ -94,12 +96,15 @@ const projects: Project[] = [
   },
   {
     title: "Ind2B - B2B Ecommerce platform",
-    coverImage: "/projects/momopay/cover.png",
+    coverImage: "/projects/b2b/1.png",
     images: [
-      "/projects/momppay/cover.png",
+      "/projects/b2b/1.png",
+      "/projects/b2b/2.png"
     ],
+
     category: 'frontend',
     github: "https://github.com/tausif892/Momopay-Backend",
+    url: "https://www.ind2b.com/",
     techStack: ["React"],
     description:
       "B2B ECommerce platform bridging the gap between the sellers and wholesalers",
@@ -107,34 +112,34 @@ const projects: Project[] = [
 ];
 
 export default function ProjectsSection() {
-  const[activeCategory, setActiveCategory] = useState("All");
-  const categories = ["All", "Frontend", "Backend", "Mobile","AI", "Cloud"];
-  const filteredProducts = activeCategory === "All" ? projects : projects.filter((project)=> project.category.toLowerCase().split(",").map((c)=>c.trim()).includes(activeCategory.toLowerCase()));
+  const [activeCategory, setActiveCategory] = useState("All");
+  const categories = ["All", "Frontend", "Backend", "Mobile", "AI", "Cloud"];
+  const filteredProducts = activeCategory === "All" ? projects : projects.filter((project) => project.category.toLowerCase().split(",").map((c) => c.trim()).includes(activeCategory.toLowerCase()));
   return (
-<>
-  <NavBar />
-  <div className="h-20" />
+    <>
+      <NavBar />
+      <div className="h-20" />
 
-  {/* FULL-BLEED FILTER BAR */}
-  <div className="full-bleed">
-    <div className="projects-filter">
-      {categories.map((cat) => (
-        <button
-          key={cat}
-          className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
-          onClick={() => setActiveCategory(cat)}
-        >
-          {cat}
-        </button>
-      ))}
-    </div>
-  </div>
+      {/* FULL-BLEED FILTER BAR */}
+      <div className="full-bleed">
+        <div className="projects-filter">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`filter-btn ${activeCategory === cat ? "active" : ""}`}
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
 
-  <section className="projects-section">
-    {filteredProducts.map((project, i) => (
-      <ProjectCard key={i} project={project} />
-    ))}
-  </section>
-</>
+      <section className="projects-section">
+        {filteredProducts.map((project, i) => (
+          <ProjectCard key={i} project={project} />
+        ))}
+      </section>
+    </>
   );
 }

@@ -352,6 +352,49 @@ body::after {
   }
 }
 
+
+/* Floating popup */
+.hosting-popup {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: rgba(20, 20, 20, 0.95);
+  color: white;
+
+  padding: 14px 24px;
+  border-radius: 14px;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+  z-index: 9999;
+
+  animation: toastIn 0.25s ease;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Optional disabled look */
+.disabled-card {
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
 /* ===================== */
 /* TIMELINE CONTAINER   */
 /* ===================== */
@@ -1738,6 +1781,63 @@ body::after {
   transform: translateY(-2px);
   box-shadow: 0 10px 30px var(--accent-glow);
 }
+
+/* ===============================
+   OVERLAY ACTION BUTTONS
+================================ */
+
+.overlay-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+/* Override margin-top from github-link since overlay-actions handles it */
+.overlay-actions .github-link {
+  margin-top: 0;
+}
+
+.visit-btn {
+  display: inline-block;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--accent-main);
+  border-radius: 12px;
+  background: var(--accent-main);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.visit-btn:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.visit-btn--disabled {
+  background: rgba(255, 255, 255, 0.04);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  color: #6b7280;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-style: italic;
+  cursor: default;
+  padding: 0.75rem 1.25rem;
+}
+
+.visit-btn--disabled:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 
 /* ============================= */
 /* SKILLS SECTION                */
